@@ -1,4 +1,5 @@
 {
+  "counterparties": [{ "name": "NHAI", "type": "GOVERNMENT_AGENCY" }],
   "dependencies": [
     {
       "company": "KNR Constructions",
@@ -28,13 +29,16 @@
       "notes": "This is IRB's own official press release (hosted on irb.co.in), directly naming NHAI as the awarding authority and counterparty ('financial support of Rs. 817 Crores from the NHAI' is also stated later in the release for this HAM project). IRB's broader annual report PDFs (e.g. https://www.irb.co.in/home/wp-content/uploads/2021/09/Annual-Report.pdf) were not cleanly text-extractable via automated fetch, but IRB's order book is well documented (via aggregated broker/search sources) as containing multiple NHAI-awarded BOT/HAM/TOT road concessions, consistent with this press release."
     }
   ],
-  "historicalShock": {
-    "company": "PNC Infratech Ltd",
-    "ticker": "PNCINFRA",
-    "eventDescription": "PNC Infratech is a closely comparable NHAI-dependent NSE-listed road EPC/HAM/BOT developer (not one of the three focal companies). On 5-6 August 2026, NHAI took action against PNC Infratech's concessionaire subsidiary (Awadh Expressway) after a ~300-metre stretch of the newly-opened 63-km Kanpur-Lucknow Expressway suffered subsidence/slippage just 13 days after opening, following heavy rain. NHAI suspended toll collection on the corridor and separately issued a notice proposing to declare PNC Infratech a 'non-performer' (which would bar it from bidding on future NHAI tenders), along with a proposed 2% penalty on performance security and possible debarment of responsible officials for up to three years. PNC Infratech shares plunged more than 6% intraday to Rs 238.90 on 6 August 2026 (Thursday) when the news broke, and per a separate Business Today report the stock closed over 5% lower again in the following session (7 August 2026) as the non-performer notice details emerged - i.e., the stock fell sharply across two consecutive trading sessions on NHAI regulatory action tied directly to an NHAI-awarded/operated highway asset.",
-    "sourceUrl": "https://www.businesstoday.in/markets/stocks/story/pnc-infratech-shares-tumble-6-after-nhai-suspends-toll-collection-on-expressway-547644-2026-08-06",
-    "eventDate": "2026-08-06",
-    "observedDrawdownPct": -6,
-    "windowDays": 2
-  }
+  "historicalShocks": [
+    {
+      "counterparty": "NHAI",
+      "company": "PNC Infratech Ltd",
+      "ticker": "PNCINFRA",
+      "eventDescription": "PNC Infratech is a closely comparable NHAI-dependent NSE-listed road EPC/HAM/BOT developer (not one of the three focal companies). On 5-6 August 2026, NHAI took action against PNC Infratech's concessionaire subsidiary (Awadh Expressway) after a ~300-metre stretch of the newly-opened 63-km Kanpur-Lucknow Expressway suffered subsidence/slippage just 13 days after opening, following heavy rain. NHAI suspended toll collection on the corridor and separately issued a notice proposing to declare PNC Infratech a 'non-performer' (which would bar it from bidding on future NHAI tenders), along with a proposed 2% penalty on performance security and possible debarment of responsible officials for up to three years. PNC Infratech shares plunged more than 6% intraday to Rs 238.90 on 6 August 2026 (Thursday) when the news broke, and per a separate Business Today report the stock closed over 5% lower again in the following session (7 August 2026) as the non-performer notice details emerged - i.e., the stock fell sharply across two consecutive trading sessions on NHAI regulatory action tied directly to an NHAI-awarded/operated highway asset.",
+      "sourceUrl": "https://www.businesstoday.in/markets/stocks/story/pnc-infratech-shares-tumble-6-after-nhai-suspends-toll-collection-on-expressway-547644-2026-08-06",
+      "eventDate": "2026-08-06",
+      "observedDrawdownPct": -6,
+      "windowDays": 2
+    }
+  ]
 }

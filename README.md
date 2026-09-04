@@ -20,7 +20,7 @@ npm install
 cp .env.example .env          # DATABASE_URL is already filled in; ANTHROPIC_API_KEY is optional
 npm run db:push               # create the SQLite schema
 npm run estimate-betas        # pulls ~2y of daily closes from Yahoo Finance, writes data/betas.json
-npm run db:seed               # seeds positions, NHAI dependency rows, and the historical shock
+npm run db:seed               # seeds positions, counterparty dependency rows, and historical shocks
 npm run dev
 ```
 
@@ -28,6 +28,41 @@ Without `ANTHROPIC_API_KEY` set, `/api/analyze-event` still runs its full valida
 alias-resolution logic — it just returns `{ abstain: true, abstainReason: "ANTHROPIC_API_KEY is not
 configured..." }` instead of calling a model. Set the key and re-run `npm run eval` for real extraction
 metrics.
+
+### Changing the data and re-running everything
+
+Nothing here has an in-app data-entry form on purpose — every number stays traceable to a committed source
+file, not a database row someone typed into a UI. To change the data:
+
+- **Holdings**: edit `HOLDINGS` in both [`scripts/estimate_betas.ts`](scripts/estimate_betas.ts) (needs a
+  valid Yahoo Finance symbol) and [`prisma/seed.ts`](prisma/seed.ts) (uses the same symbol as the key).
+- **Counterparties and dependencies**: edit
+  [`research/nhai_dependencies.json`](research/nhai_dependencies.json) — add an entry to `counterparties`
+  (`{ name, type }`) and reference it by name from any `dependencies[].counterparty` or
+  `historicalShocks[].counterparty`. This is genuinely data-driven: `prisma/seed.ts` creates every
+  counterparty this file lists, not just NHAI. A `sourceSpan` that's empty is still refused at insert time.
+- **Evaluation items**: edit [`eval/dataset.json`](eval/dataset.json), following the existing item shape.
+  Every labeled `span` must be an exact substring of that item's `excerpt` — `eval/run.ts` matches on exact
+  span equality, so a mismatched quote just shows as "missed," not an error.
+
+Then rerun whichever of these actually changed, in order:
+
+```bash
+npm run estimate-betas   # only if you touched HOLDINGS
+npm run db:push          # only if you touched prisma/schema.prisma
+npm run db:seed          # holdings + counterparties + dependencies + shocks
+npm run eval              # evaluation dataset
+```
+
+or run all four in sequence with `npm run data:refresh`. The running dev server picks up the new data on
+the next request without a restart (`app/page.tsx` and the Evaluation panel both read fresh on every
+request). On Windows, if `npm run dev` is running in another terminal while you run this, `prisma db push`
+may print a harmless `EPERM` warning about the query engine `.dll` being locked — the schema and client
+still update correctly; stop the dev server first if you want a clean run.
+
+The event-analysis and shock panels are scoped to whichever counterparty carries the most total exposure —
+if you add a second counterparty, it still appears in the Counterparty Concentration panel, just without its
+own shock/impact panel below.
 
 ---
 

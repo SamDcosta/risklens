@@ -37,9 +37,14 @@ export default async function Home() {
   const exposures = computeCounterpartyExposure(counterparties, dependencies, positions, portfolioValue);
   const betaStats = loadBetaStats();
 
-  const primaryCounterparty = counterparties[0] ?? null;
-  const primaryExposure = exposures.find((e) => e.counterparty.id === primaryCounterparty?.id);
+  // The event-analysis and shock panels are scoped to whichever counterparty carries the most
+  // exposure. With more than one counterparty seeded, the others still show up in the
+  // Counterparty Concentration panel above (which lists all of them) but don't get their own
+  // shock/impact panel here — a deliberate scope limit, not an oversight.
+  const primaryExposure = [...exposures].sort((a, b) => b.exposure - a.exposure)[0] ?? null;
+  const primaryCounterparty = primaryExposure?.counterparty ?? null;
   const dependentHoldings = primaryExposure ? primaryExposure.positions.map((p) => p.position) : [];
+  const primaryHistoricalShocks = shocks.filter((s) => s.counterpartyId === primaryCounterparty?.id);
 
   return (
     <>
@@ -57,7 +62,7 @@ export default async function Home() {
             positions={positions}
             dependencies={dependencies}
             counterparty={primaryCounterparty}
-            historicalShocks={shocks}
+            historicalShocks={primaryHistoricalShocks}
           />
         </>
       )}

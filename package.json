@@ -10,7 +10,8 @@
     "estimate-betas": "tsx scripts/estimate_betas.ts",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "eval": "tsx eval/run.ts"
+    "eval": "tsx eval/run.ts",
+    "data:refresh": "npm run estimate-betas && npm run db:push && npm run db:seed && npm run eval"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.123.0",

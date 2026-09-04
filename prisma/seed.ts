@@ -49,7 +49,7 @@ interface RawSeries {
   closes: number[];
 }
 
-interface NhaiDependency {
+interface DependencyResearch {
   company: string;
   ticker: string;
   counterparty: string;
@@ -59,22 +59,31 @@ interface NhaiDependency {
   notes: string;
 }
 
-interface NhaiResearch {
-  dependencies: NhaiDependency[];
-  historicalShock: {
-    company: string;
-    ticker: string;
-    eventDescription: string;
-    sourceUrl: string;
-    eventDate: string;
-    observedDrawdownPct: number;
-    windowDays: number;
-  };
+interface CounterpartyResearch {
+  name: string;
+  type: string;
+}
+
+interface HistoricalShockResearch {
+  counterparty: string;
+  company: string;
+  ticker: string;
+  eventDescription: string;
+  sourceUrl: string;
+  eventDate: string;
+  observedDrawdownPct: number;
+  windowDays: number;
+}
+
+interface DependencyResearchFile {
+  counterparties: CounterpartyResearch[];
+  dependencies: DependencyResearch[];
+  historicalShocks: HistoricalShockResearch[];
 }
 
 async function main() {
   const betasFile = loadJson<BetasFile>("data/betas.json");
-  const research = loadJson<NhaiResearch>("research/nhai_dependencies.json");
+  const research = loadJson<DependencyResearchFile>("research/nhai_dependencies.json");
   const betasBySymbol = new Map(betasFile.betas.map((b) => [b.symbol, b]));
 
   console.log("Clearing existing data...");
@@ -127,15 +136,26 @@ async function main() {
   }
 
   console.log("Seeding counterparties...");
-  const nhai = await prisma.counterparty.create({
-    data: { name: "NHAI", type: "GOVERNMENT_AGENCY" },
-  });
+  const counterpartiesByName = new Map<string, { id: string }>();
+  for (const c of research.counterparties) {
+    const counterparty = await prisma.counterparty.create({ data: { name: c.name, type: c.type } });
+    counterpartiesByName.set(c.name, counterparty);
+    console.log(`  ${c.name} (${c.type})`);
+  }
 
   console.log("Seeding dependencies (source span required — no span, no row)...");
   for (const dep of research.dependencies) {
     const position = positionsBySymbol.get(dep.ticker);
     if (!position) {
       console.warn(`  Skipping dependency for unknown ticker ${dep.ticker}`);
+      continue;
+    }
+    const counterparty = counterpartiesByName.get(dep.counterparty);
+    if (!counterparty) {
+      console.warn(
+        `  Skipping dependency ${dep.ticker} -> ${dep.counterparty}: "${dep.counterparty}" is not listed in ` +
+          `research file's "counterparties" array.`
+      );
       continue;
     }
     if (!dep.sourceSpan) {
@@ -145,31 +165,38 @@ async function main() {
     await createDependency({
       positionId: position.id,
       positionSymbolForError: dep.ticker,
-      counterpartyId: nhai.id,
+      counterpartyId: counterparty.id,
       counterpartyNameForError: dep.counterparty,
       sourceDocument: dep.sourceDocument,
       sourceUrl: dep.sourceUrl,
       sourceSpan: dep.sourceSpan,
       extractedBy: "MANUAL",
     });
-    console.log(`  ${dep.ticker} -> NHAI: recorded with source span from ${dep.sourceUrl}`);
+    console.log(`  ${dep.ticker} -> ${dep.counterparty}: recorded with source span from ${dep.sourceUrl}`);
   }
 
-  console.log("Seeding historical shock...");
-  const shockEvent = research.historicalShock;
-  await prisma.shock.create({
-    data: {
-      label: `NHAI enforcement action on an NHAI toll asset (${shockEvent.company} analogue, ${shockEvent.eventDate})`,
-      description: shockEvent.eventDescription,
-      provenance: "HISTORICAL",
-      counterpartyId: nhai.id,
-      magnitudePct: shockEvent.observedDrawdownPct / 100,
-      sourceUrl: shockEvent.sourceUrl,
-      eventDate: new Date(shockEvent.eventDate),
-      observedDrawdownPct: shockEvent.observedDrawdownPct,
-      windowDays: shockEvent.windowDays,
-    },
-  });
+  console.log("Seeding historical shocks...");
+  for (const shockEvent of research.historicalShocks) {
+    const counterparty = counterpartiesByName.get(shockEvent.counterparty);
+    if (!counterparty) {
+      console.warn(`  Skipping historical shock for unknown counterparty "${shockEvent.counterparty}"`);
+      continue;
+    }
+    await prisma.shock.create({
+      data: {
+        label: `${shockEvent.counterparty} enforcement action (${shockEvent.company} analogue, ${shockEvent.eventDate})`,
+        description: shockEvent.eventDescription,
+        provenance: "HISTORICAL",
+        counterpartyId: counterparty.id,
+        magnitudePct: shockEvent.observedDrawdownPct / 100,
+        sourceUrl: shockEvent.sourceUrl,
+        eventDate: new Date(shockEvent.eventDate),
+        observedDrawdownPct: shockEvent.observedDrawdownPct,
+        windowDays: shockEvent.windowDays,
+      },
+    });
+    console.log(`  ${shockEvent.counterparty}: ${shockEvent.observedDrawdownPct}% analogue seeded`);
+  }
 
   console.log("Done.");
 }
