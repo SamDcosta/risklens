@@ -176,7 +176,38 @@ declined counts toward `abstentionRate`.
 
 ## Evaluation
 
-See the **Evaluation** section on the running app, or `eval/results.json` after running `npm run eval`.
+25 hand-labeled items, both extractors scored on the same set.
+Model: `gemini-3.5-flash-lite`. Full output in [`eval/results.json`](eval/results.json).
+
+| Metric | Alias matcher (no LLM) | Gemini |
+|---|---:|---:|
+| Coverage (items scored) | 100.0% | 100.0% |
+| Error rate (no response obtained) | 0.0% | 0.0% |
+| Entity precision | 57.1% | 62.0% |
+| **Entity recall** | **33.3%** | **91.7%** |
+| Counterparty linking accuracy | 84.0% | 80.0% |
+| **Hallucination rate** | **0.0%** | **0.0%** |
+| Abstention rate | 24.0% | 0.0% |
+| Unresolved-entity rate | 21.4% | 78.9% |
+
+**Recall is the number that matters**: the LLM finds 91.7% of labeled entities against the baseline's 33.3%,
+which is the measured case for using a model here rather than an assumed one.
+
+**Hallucination rate is 0.0% for both** — no returned entity failed the span-containment check. That is the
+check working, not an absence of risk: it's enforced in code, so a hallucinated span is structurally unable
+to reach the UI.
+
+Three results worth reading honestly rather than as wins:
+
+- **The baseline beats Gemini on counterparty linking (84.0% vs 80.0%).** Within our tiny counterparty
+  universe of one, exact string matching is simply hard to beat, and the model occasionally over-attributes.
+- **Gemini's unresolved-entity rate is much higher (78.9% vs 21.4%) and this is correct behaviour.** The
+  dataset deliberately includes out-of-universe companies (Tata Motors, Adani Road Transport, L&T, SEBI).
+  Extracting them *and* correctly declining to resolve them to one of our six holdings is what should happen.
+  The baseline scores "better" here only because it cannot see them at all.
+- **Named failures are more informative than the aggregates.** In `article-03`, HG Infra is referred to only
+  as "the infrastructure major" with no company name in the excerpt — Gemini missed it, exactly the
+  indirect-reference case the dataset was built to probe.
 
 Per the copyright limits this build was produced under, `eval/dataset.json` stores short (~60-word) verbatim
 excerpts with full source attribution (URL, publisher, date) rather than full article text — enough to

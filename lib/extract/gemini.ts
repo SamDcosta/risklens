@@ -1,12 +1,18 @@
 import { GoogleGenAI } from "@google/genai";
 import { ENTITY_TYPES, RawExtractionSchema, finalize, type ExtractionResult } from "./shared";
 
-const DEFAULT_MODEL = "gemini-3.6-flash";
+// Flash-lite rather than full flash: on a free-tier key the larger flash
+// models exhaust their daily quota within a single 25-item eval run, and a
+// benchmark you can only run once a day isn't much of a benchmark. Override
+// with GEMINI_MODEL to re-run against a bigger model.
+const DEFAULT_MODEL = "gemini-3.5-flash-lite";
 const TIMEOUT_MS = 20_000;
 
 // Pinned, not an alias like "gemini-flash-latest": an eval whose model can
-// change under it isn't reproducible.
-const MODEL = process.env.GEMINI_MODEL || DEFAULT_MODEL;
+// change under it isn't reproducible. Exported so eval results record the
+// model that actually ran, rather than a second copy of this string that can
+// drift out of sync with it.
+export const MODEL = process.env.GEMINI_MODEL || DEFAULT_MODEL;
 
 const RESPONSE_SCHEMA = {
   type: "object",

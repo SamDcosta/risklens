@@ -1,688 +1,1398 @@
 {
-  "runAt": "2026-09-04T21:51:22.250Z",
-  "llmConfigured": false,
+  "runAt": "2026-09-04T23:00:27.733Z",
   "datasetSize": 25,
-  "metrics": {
-    "entityPrecision": null,
-    "entityRecall": 0,
-    "counterpartyLinkingAccuracy": 0.72,
-    "hallucinationRate": null,
-    "abstentionRate": 1,
-    "unresolvedEntityRate": null
-  },
-  "itemResults": [
-    {
-      "id": "article-01",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI.",
-      "missedSpans": [
-        "KNR Constructions",
-        "Highway Engineering Consultancy (HEC)"
+  "geminiConfigured": true,
+  "geminiModel": "gemini-3.5-flash-lite",
+  "byExtractor": {
+    "BASELINE": {
+      "metrics": {
+        "coverage": 1,
+        "errorRate": 0,
+        "entityPrecision": 0.5714285714285714,
+        "entityRecall": 0.3333333333333333,
+        "counterpartyLinkingAccuracy": 0.84,
+        "hallucinationRate": 0,
+        "abstentionRate": 0.24,
+        "unresolvedEntityRate": 0.21428571428571427
+      },
+      "itemResults": [
+        {
+          "id": "article-01",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI.",
+          "missedSpans": [
+            "Highway Engineering Consultancy (HEC)"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-02",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 3,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ]
+        },
+        {
+          "id": "article-03",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 2,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 2,
+          "droppedForContainment": 0,
+          "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution.",
+          "missedSpans": [
+            "the infrastructure major"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ]
+        },
+        {
+          "id": "article-04",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [
+            "IRB Infrastructure Developers Limited"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-05",
+          "abstained": true,
+          "failed": false,
+          "abstainReason": "No known company or counterparty name appears in the text.",
+          "predictedEntityCount": 0,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 0,
+          "droppedForContainment": 0,
+          "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution.",
+          "missedSpans": [
+            "Jio"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-06",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ]
+        },
+        {
+          "id": "article-07",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 2,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 2,
+          "droppedForContainment": 0,
+          "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol.",
+          "missedSpans": [
+            "PNC Infratech Limited",
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ]
+        },
+        {
+          "id": "article-08",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe.",
+          "missedSpans": [
+            "Adani Road Transport"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-09",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 3,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE.",
+          "missedSpans": [
+            "Securities and Exchange Board of India (SEBI)",
+            "Jio Platforms"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-10",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 3,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol.",
+          "missedSpans": [
+            "IRB Infrastructure Developers Limited",
+            "IRB InvIT Fund",
+            "IRB Infrastructure Trust"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-11",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-12",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 2,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 2,
+          "droppedForContainment": 0,
+          "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching.",
+          "missedSpans": [
+            "Ashoka Buildcon Ltd",
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ]
+        },
+        {
+          "id": "article-13",
+          "abstained": true,
+          "failed": false,
+          "abstainReason": "No known company or counterparty name appears in the text.",
+          "predictedEntityCount": 0,
+          "groundTruthEntityCount": 4,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 0,
+          "droppedForContainment": 0,
+          "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank.",
+          "missedSpans": [
+            "InterGlobe Aviation (IndiGo)",
+            "Max Healthcare",
+            "IndusInd Bank",
+            "Hero MotoCorp"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-14",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution.",
+          "missedSpans": [
+            "Reliance Retail"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-15",
+          "abstained": true,
+          "failed": false,
+          "abstainReason": "No known company or counterparty name appears in the text.",
+          "predictedEntityCount": 0,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 0,
+          "droppedForContainment": 0,
+          "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution).",
+          "missedSpans": [
+            "Tata Motors"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-16",
+          "abstained": true,
+          "failed": false,
+          "abstainReason": "No known company or counterparty name appears in the text.",
+          "predictedEntityCount": 0,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 0,
+          "droppedForContainment": 0,
+          "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic.",
+          "missedSpans": [
+            "Infosys"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-17",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding.",
+          "missedSpans": [
+            "IRB Infrastructure Trust"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ]
+        },
+        {
+          "id": "article-18",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example.",
+          "missedSpans": [
+            "IRB MP Expressway Pvt Ltd"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-19",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [
+            "Reliance Industries Limited (RIL)"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-20",
+          "abstained": true,
+          "failed": false,
+          "abstainReason": "No known company or counterparty name appears in the text.",
+          "predictedEntityCount": 0,
+          "groundTruthEntityCount": 6,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 0,
+          "droppedForContainment": 0,
+          "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'.",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)",
+            "ICICI Bank Ltd",
+            "Axis Bank Ltd",
+            "Bank of Maharashtra (BoM)",
+            "IDBI Bank Ltd",
+            "Bank of Baroda (BoB)"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-21",
+          "abstained": true,
+          "failed": false,
+          "abstainReason": "No known company or counterparty name appears in the text.",
+          "predictedEntityCount": 0,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 0,
+          "droppedForContainment": 0,
+          "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON.",
+          "missedSpans": [
+            "Larsen & Toubro (L&T)"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-22",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 3,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank.",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)",
+            "IndusInd Bank"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-23",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-24",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-25",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt.",
+          "missedSpans": [
+            "H.G. Infra Engineering Ltd"
+          ],
+          "extraUnresolvedSpans": []
+        }
       ],
-      "extraUnresolvedSpans": []
+      "namedFailures": [
+        {
+          "id": "article-01",
+          "missedSpans": [
+            "Highway Engineering Consultancy (HEC)"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI."
+        },
+        {
+          "id": "article-02",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ],
+          "note": null
+        },
+        {
+          "id": "article-03",
+          "missedSpans": [
+            "the infrastructure major"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ],
+          "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution."
+        },
+        {
+          "id": "article-04",
+          "missedSpans": [
+            "IRB Infrastructure Developers Limited"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": null
+        },
+        {
+          "id": "article-05",
+          "missedSpans": [
+            "Jio"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution."
+        },
+        {
+          "id": "article-06",
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ],
+          "note": null
+        },
+        {
+          "id": "article-07",
+          "missedSpans": [
+            "PNC Infratech Limited",
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ],
+          "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol."
+        },
+        {
+          "id": "article-08",
+          "missedSpans": [
+            "Adani Road Transport"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe."
+        },
+        {
+          "id": "article-09",
+          "missedSpans": [
+            "Securities and Exchange Board of India (SEBI)",
+            "Jio Platforms"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE."
+        },
+        {
+          "id": "article-10",
+          "missedSpans": [
+            "IRB Infrastructure Developers Limited",
+            "IRB InvIT Fund",
+            "IRB Infrastructure Trust"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol."
+        },
+        {
+          "id": "article-12",
+          "missedSpans": [
+            "Ashoka Buildcon Ltd",
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ],
+          "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching."
+        },
+        {
+          "id": "article-13",
+          "missedSpans": [
+            "InterGlobe Aviation (IndiGo)",
+            "Max Healthcare",
+            "IndusInd Bank",
+            "Hero MotoCorp"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank."
+        },
+        {
+          "id": "article-14",
+          "missedSpans": [
+            "Reliance Retail"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution."
+        },
+        {
+          "id": "article-15",
+          "missedSpans": [
+            "Tata Motors"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution)."
+        },
+        {
+          "id": "article-16",
+          "missedSpans": [
+            "Infosys"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic."
+        },
+        {
+          "id": "article-17",
+          "missedSpans": [
+            "IRB Infrastructure Trust"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ],
+          "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding."
+        },
+        {
+          "id": "article-18",
+          "missedSpans": [
+            "IRB MP Expressway Pvt Ltd"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example."
+        },
+        {
+          "id": "article-19",
+          "missedSpans": [
+            "Reliance Industries Limited (RIL)"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": null
+        },
+        {
+          "id": "article-20",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)",
+            "ICICI Bank Ltd",
+            "Axis Bank Ltd",
+            "Bank of Maharashtra (BoM)",
+            "IDBI Bank Ltd",
+            "Bank of Baroda (BoB)"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'."
+        },
+        {
+          "id": "article-21",
+          "missedSpans": [
+            "Larsen & Toubro (L&T)"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON."
+        },
+        {
+          "id": "article-22",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)",
+            "IndusInd Bank"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank."
+        },
+        {
+          "id": "article-25",
+          "missedSpans": [
+            "H.G. Infra Engineering Ltd"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt."
+        }
+      ]
     },
-    {
-      "id": "article-02",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "NHAI",
-        "KNR Constructions Ltd"
+    "GEMINI": {
+      "metrics": {
+        "coverage": 1,
+        "errorRate": 0,
+        "entityPrecision": 0.6197183098591549,
+        "entityRecall": 0.9166666666666666,
+        "counterpartyLinkingAccuracy": 0.8,
+        "hallucinationRate": 0,
+        "abstentionRate": 0,
+        "unresolvedEntityRate": 0.7887323943661971
+      },
+      "itemResults": [
+        {
+          "id": "article-01",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 5,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 4,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 5,
+          "droppedForContainment": 0,
+          "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI.",
+          "missedSpans": [
+            "Highway Engineering Consultancy (HEC)"
+          ],
+          "extraUnresolvedSpans": [
+            "Highway Engineering Consultancy",
+            "HEC",
+            "KNR Constructions",
+            "Highway Engineering Consultancy"
+          ]
+        },
+        {
+          "id": "article-02",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 3,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [
+            "KNR Constructions Ltd"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI",
+            "M/s KNR Constructions Ltd",
+            "M/s KNR Constructions Ltd"
+          ]
+        },
+        {
+          "id": "article-03",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 2,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 2,
+          "droppedForContainment": 0,
+          "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution.",
+          "missedSpans": [
+            "the infrastructure major"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ]
+        },
+        {
+          "id": "article-04",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB Infrastructure Developers Limited"
+          ]
+        },
+        {
+          "id": "article-05",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Jio"
+          ]
+        },
+        {
+          "id": "article-06",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ]
+        },
+        {
+          "id": "article-07",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 4,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 3,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 4,
+          "droppedForContainment": 0,
+          "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol.",
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "PNC Infratech Limited",
+            "Barabanki Mustafabad Highway Private Limited",
+            "National Highways Authority of India"
+          ]
+        },
+        {
+          "id": "article-08",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 4,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 3,
+          "unresolvedPredicted": 3,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 4,
+          "droppedForContainment": 0,
+          "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Adani Road Transport",
+            "Adani Group",
+            "IRB Infrastructure Developers"
+          ]
+        },
+        {
+          "id": "article-09",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 3,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 2,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE.",
+          "missedSpans": [
+            "Securities and Exchange Board of India (SEBI)"
+          ],
+          "extraUnresolvedSpans": [
+            "Securities and Exchange Board of India",
+            "Jio Platforms"
+          ]
+        },
+        {
+          "id": "article-10",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 4,
+          "groundTruthEntityCount": 3,
+          "matchedSpans": 4,
+          "unresolvedPredicted": 4,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 4,
+          "droppedForContainment": 0,
+          "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB Infrastructure Developers Limited",
+            "IRB InvIT Fund",
+            "IRB Infrastructure Trust",
+            "IRB Infrastructure Trust"
+          ]
+        },
+        {
+          "id": "article-11",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-12",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 2,
+          "counterpartyLinkingCorrect": false,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching.",
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "Ashoka Buildcon Ltd",
+            "National Highways Authority of India"
+          ]
+        },
+        {
+          "id": "article-13",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 5,
+          "groundTruthEntityCount": 4,
+          "matchedSpans": 3,
+          "unresolvedPredicted": 5,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 5,
+          "droppedForContainment": 0,
+          "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank.",
+          "missedSpans": [
+            "InterGlobe Aviation (IndiGo)"
+          ],
+          "extraUnresolvedSpans": [
+            "InterGlobe Aviation",
+            "IndiGo",
+            "Max Healthcare",
+            "IndusInd Bank",
+            "Hero MotoCorp"
+          ]
+        },
+        {
+          "id": "article-14",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Reliance Retail"
+          ]
+        },
+        {
+          "id": "article-15",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 6,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 6,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 6,
+          "droppedForContainment": 0,
+          "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution).",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Tata Motors",
+            "TMLCV",
+            "Tata Motors Passenger Vehicles Limited",
+            "TMPV",
+            "Tata Motors",
+            "TML"
+          ]
+        },
+        {
+          "id": "article-16",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Infosys"
+          ]
+        },
+        {
+          "id": "article-17",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 3,
+          "unresolvedPredicted": 2,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB Infrastructure Trust",
+            "NHAI"
+          ]
+        },
+        {
+          "id": "article-18",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 2,
+          "groundTruthEntityCount": 2,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 2,
+          "droppedForContainment": 0,
+          "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB MP Expressway Pvt Ltd"
+          ]
+        },
+        {
+          "id": "article-19",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 0,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [
+            "Reliance Industries Limited (RIL)"
+          ],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-20",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 11,
+          "groundTruthEntityCount": 6,
+          "matchedSpans": 6,
+          "unresolvedPredicted": 11,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 11,
+          "droppedForContainment": 0,
+          "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'.",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)",
+            "Bank of Maharashtra (BoM)",
+            "Bank of Baroda (BoB)"
+          ],
+          "extraUnresolvedSpans": [
+            "Reserve Bank of India",
+            "ICICI Bank Ltd",
+            "Axis Bank Ltd",
+            "Bank of Maharashtra",
+            "IDBI Bank Ltd",
+            "Bank of Baroda",
+            "ICICI Bank Ltd",
+            "Axis Bank Ltd",
+            "Bank of Maharashtra",
+            "IDBI Bank Ltd",
+            "Bank of Baroda"
+          ]
+        },
+        {
+          "id": "article-21",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Larsen & Toubro (L&T)"
+          ]
+        },
+        {
+          "id": "article-22",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 3,
+          "groundTruthEntityCount": 3,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 2,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 3,
+          "droppedForContainment": 0,
+          "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank.",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)"
+          ],
+          "extraUnresolvedSpans": [
+            "Reserve Bank of India",
+            "IndusInd Bank"
+          ]
+        },
+        {
+          "id": "article-23",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-24",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 0,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": null,
+          "missedSpans": [],
+          "extraUnresolvedSpans": []
+        },
+        {
+          "id": "article-25",
+          "abstained": false,
+          "failed": false,
+          "predictedEntityCount": 1,
+          "groundTruthEntityCount": 1,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 1,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 1,
+          "droppedForContainment": 0,
+          "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt.",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "H.G. Infra Engineering Ltd"
+          ]
+        }
       ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-03",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution.",
-      "missedSpans": [
-        "the infrastructure major",
-        "NHAI"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-04",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "IRB Infrastructure Developers Limited"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-05",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution.",
-      "missedSpans": [
-        "Jio"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-06",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "KNR Constructions Limited",
-        "National Highways Authority of India (NHAI)"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-07",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol.",
-      "missedSpans": [
-        "PNC Infratech Limited",
-        "National Highways Authority of India (NHAI)"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-08",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe.",
-      "missedSpans": [
-        "Adani Road Transport",
-        "IRB Infrastructure Developers"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-09",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 3,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE.",
-      "missedSpans": [
-        "Securities and Exchange Board of India (SEBI)",
-        "Jio Platforms",
-        "Reliance Industries"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-10",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 3,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol.",
-      "missedSpans": [
-        "IRB Infrastructure Developers Limited",
-        "IRB InvIT Fund",
-        "IRB Infrastructure Trust"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-11",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "HDFC Bank"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-12",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching.",
-      "missedSpans": [
-        "Ashoka Buildcon Ltd",
-        "National Highways Authority of India (NHAI)"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-13",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 4,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank.",
-      "missedSpans": [
-        "InterGlobe Aviation (IndiGo)",
-        "Max Healthcare",
-        "IndusInd Bank",
-        "Hero MotoCorp"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-14",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution.",
-      "missedSpans": [
-        "Reliance Retail"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-15",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution).",
-      "missedSpans": [
-        "Tata Motors"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-16",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic.",
-      "missedSpans": [
-        "Infosys"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-17",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": false,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding.",
-      "missedSpans": [
-        "IRB Infrastructure Trust",
-        "NHAI"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-18",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 2,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example.",
-      "missedSpans": [
-        "IRB",
-        "IRB MP Expressway Pvt Ltd"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-19",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "Reliance Industries Limited (RIL)"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-20",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 6,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'.",
-      "missedSpans": [
-        "Reserve Bank of India (RBI)",
-        "ICICI Bank Ltd",
-        "Axis Bank Ltd",
-        "Bank of Maharashtra (BoM)",
-        "IDBI Bank Ltd",
-        "Bank of Baroda (BoB)"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-21",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON.",
-      "missedSpans": [
-        "Larsen & Toubro (L&T)"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-22",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 3,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank.",
-      "missedSpans": [
-        "HDFC Bank",
-        "Reserve Bank of India (RBI)",
-        "IndusInd Bank"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-23",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "HDFC Bank"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-24",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": null,
-      "missedSpans": [
-        "Reliance Industries"
-      ],
-      "extraUnresolvedSpans": []
-    },
-    {
-      "id": "article-25",
-      "abstained": true,
-      "abstainReason": "ANTHROPIC_API_KEY is not configured on this deployment. The extraction endpoint's validation, span-containment, and resolution logic run either way — only the model call is stubbed out.",
-      "predictedEntityCount": 0,
-      "groundTruthEntityCount": 1,
-      "matchedSpans": 0,
-      "unresolvedPredicted": 0,
-      "counterpartyLinkingCorrect": true,
-      "rawEntityCount": null,
-      "droppedForContainment": null,
-      "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt.",
-      "missedSpans": [
-        "H.G. Infra Engineering Ltd"
-      ],
-      "extraUnresolvedSpans": []
+      "namedFailures": [
+        {
+          "id": "article-01",
+          "missedSpans": [
+            "Highway Engineering Consultancy (HEC)"
+          ],
+          "extraUnresolvedSpans": [
+            "Highway Engineering Consultancy",
+            "HEC",
+            "KNR Constructions",
+            "Highway Engineering Consultancy"
+          ],
+          "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI."
+        },
+        {
+          "id": "article-02",
+          "missedSpans": [
+            "KNR Constructions Ltd"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI",
+            "M/s KNR Constructions Ltd",
+            "M/s KNR Constructions Ltd"
+          ],
+          "note": null
+        },
+        {
+          "id": "article-03",
+          "missedSpans": [
+            "the infrastructure major"
+          ],
+          "extraUnresolvedSpans": [
+            "NHAI"
+          ],
+          "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution."
+        },
+        {
+          "id": "article-04",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB Infrastructure Developers Limited"
+          ],
+          "note": null
+        },
+        {
+          "id": "article-05",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Jio"
+          ],
+          "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution."
+        },
+        {
+          "id": "article-06",
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "National Highways Authority of India"
+          ],
+          "note": null
+        },
+        {
+          "id": "article-07",
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "PNC Infratech Limited",
+            "Barabanki Mustafabad Highway Private Limited",
+            "National Highways Authority of India"
+          ],
+          "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol."
+        },
+        {
+          "id": "article-08",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Adani Road Transport",
+            "Adani Group",
+            "IRB Infrastructure Developers"
+          ],
+          "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe."
+        },
+        {
+          "id": "article-09",
+          "missedSpans": [
+            "Securities and Exchange Board of India (SEBI)"
+          ],
+          "extraUnresolvedSpans": [
+            "Securities and Exchange Board of India",
+            "Jio Platforms"
+          ],
+          "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE."
+        },
+        {
+          "id": "article-10",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB Infrastructure Developers Limited",
+            "IRB InvIT Fund",
+            "IRB Infrastructure Trust",
+            "IRB Infrastructure Trust"
+          ],
+          "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol."
+        },
+        {
+          "id": "article-12",
+          "missedSpans": [
+            "National Highways Authority of India (NHAI)"
+          ],
+          "extraUnresolvedSpans": [
+            "Ashoka Buildcon Ltd",
+            "National Highways Authority of India"
+          ],
+          "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching."
+        },
+        {
+          "id": "article-13",
+          "missedSpans": [
+            "InterGlobe Aviation (IndiGo)"
+          ],
+          "extraUnresolvedSpans": [
+            "InterGlobe Aviation",
+            "IndiGo",
+            "Max Healthcare",
+            "IndusInd Bank",
+            "Hero MotoCorp"
+          ],
+          "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank."
+        },
+        {
+          "id": "article-14",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Reliance Retail"
+          ],
+          "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution."
+        },
+        {
+          "id": "article-15",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Tata Motors",
+            "TMLCV",
+            "Tata Motors Passenger Vehicles Limited",
+            "TMPV",
+            "Tata Motors",
+            "TML"
+          ],
+          "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution)."
+        },
+        {
+          "id": "article-16",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Infosys"
+          ],
+          "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic."
+        },
+        {
+          "id": "article-17",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB Infrastructure Trust",
+            "NHAI"
+          ],
+          "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding."
+        },
+        {
+          "id": "article-18",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "IRB MP Expressway Pvt Ltd"
+          ],
+          "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example."
+        },
+        {
+          "id": "article-19",
+          "missedSpans": [
+            "Reliance Industries Limited (RIL)"
+          ],
+          "extraUnresolvedSpans": [],
+          "note": null
+        },
+        {
+          "id": "article-20",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)",
+            "Bank of Maharashtra (BoM)",
+            "Bank of Baroda (BoB)"
+          ],
+          "extraUnresolvedSpans": [
+            "Reserve Bank of India",
+            "ICICI Bank Ltd",
+            "Axis Bank Ltd",
+            "Bank of Maharashtra",
+            "IDBI Bank Ltd",
+            "Bank of Baroda",
+            "ICICI Bank Ltd",
+            "Axis Bank Ltd",
+            "Bank of Maharashtra",
+            "IDBI Bank Ltd",
+            "Bank of Baroda"
+          ],
+          "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'."
+        },
+        {
+          "id": "article-21",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "Larsen & Toubro (L&T)"
+          ],
+          "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON."
+        },
+        {
+          "id": "article-22",
+          "missedSpans": [
+            "Reserve Bank of India (RBI)"
+          ],
+          "extraUnresolvedSpans": [
+            "Reserve Bank of India",
+            "IndusInd Bank"
+          ],
+          "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank."
+        },
+        {
+          "id": "article-25",
+          "missedSpans": [],
+          "extraUnresolvedSpans": [
+            "H.G. Infra Engineering Ltd"
+          ],
+          "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt."
+        }
+      ]
     }
-  ],
-  "namedFailures": [
-    {
-      "id": "article-01",
-      "missedSpans": [
-        "KNR Constructions",
-        "Highway Engineering Consultancy (HEC)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI."
-    },
-    {
-      "id": "article-02",
-      "missedSpans": [
-        "NHAI",
-        "KNR Constructions Ltd"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-03",
-      "missedSpans": [
-        "the infrastructure major",
-        "NHAI"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution."
-    },
-    {
-      "id": "article-04",
-      "missedSpans": [
-        "IRB Infrastructure Developers Limited"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-05",
-      "missedSpans": [
-        "Jio"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution."
-    },
-    {
-      "id": "article-06",
-      "missedSpans": [
-        "KNR Constructions Limited",
-        "National Highways Authority of India (NHAI)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-07",
-      "missedSpans": [
-        "PNC Infratech Limited",
-        "National Highways Authority of India (NHAI)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol."
-    },
-    {
-      "id": "article-08",
-      "missedSpans": [
-        "Adani Road Transport",
-        "IRB Infrastructure Developers"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe."
-    },
-    {
-      "id": "article-09",
-      "missedSpans": [
-        "Securities and Exchange Board of India (SEBI)",
-        "Jio Platforms",
-        "Reliance Industries"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE."
-    },
-    {
-      "id": "article-10",
-      "missedSpans": [
-        "IRB Infrastructure Developers Limited",
-        "IRB InvIT Fund",
-        "IRB Infrastructure Trust"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol."
-    },
-    {
-      "id": "article-11",
-      "missedSpans": [
-        "HDFC Bank"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-12",
-      "missedSpans": [
-        "Ashoka Buildcon Ltd",
-        "National Highways Authority of India (NHAI)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching."
-    },
-    {
-      "id": "article-13",
-      "missedSpans": [
-        "InterGlobe Aviation (IndiGo)",
-        "Max Healthcare",
-        "IndusInd Bank",
-        "Hero MotoCorp"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank."
-    },
-    {
-      "id": "article-14",
-      "missedSpans": [
-        "Reliance Retail"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution."
-    },
-    {
-      "id": "article-15",
-      "missedSpans": [
-        "Tata Motors"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution)."
-    },
-    {
-      "id": "article-16",
-      "missedSpans": [
-        "Infosys"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic."
-    },
-    {
-      "id": "article-17",
-      "missedSpans": [
-        "IRB Infrastructure Trust",
-        "NHAI"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding."
-    },
-    {
-      "id": "article-18",
-      "missedSpans": [
-        "IRB",
-        "IRB MP Expressway Pvt Ltd"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example."
-    },
-    {
-      "id": "article-19",
-      "missedSpans": [
-        "Reliance Industries Limited (RIL)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-20",
-      "missedSpans": [
-        "Reserve Bank of India (RBI)",
-        "ICICI Bank Ltd",
-        "Axis Bank Ltd",
-        "Bank of Maharashtra (BoM)",
-        "IDBI Bank Ltd",
-        "Bank of Baroda (BoB)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'."
-    },
-    {
-      "id": "article-21",
-      "missedSpans": [
-        "Larsen & Toubro (L&T)"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON."
-    },
-    {
-      "id": "article-22",
-      "missedSpans": [
-        "HDFC Bank",
-        "Reserve Bank of India (RBI)",
-        "IndusInd Bank"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank."
-    },
-    {
-      "id": "article-23",
-      "missedSpans": [
-        "HDFC Bank"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-24",
-      "missedSpans": [
-        "Reliance Industries"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": null
-    },
-    {
-      "id": "article-25",
-      "missedSpans": [
-        "H.G. Infra Engineering Ltd"
-      ],
-      "extraUnresolvedSpans": [],
-      "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt."
-    }
-  ]
+  }
 }

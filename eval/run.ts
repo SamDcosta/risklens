@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { analyzeEventBaseline, analyzeEventGemini, isGeminiConfigured } from "../lib/extract";
+import { MODEL as GEMINI_MODEL } from "../lib/extract/gemini";
 import type { ExtractionResult, Extractor } from "../lib/extract/shared";
 
 interface LabeledEntity {
@@ -196,7 +197,7 @@ async function main() {
     runAt: new Date().toISOString(),
     datasetSize: dataset.length,
     geminiConfigured,
-    geminiModel: geminiConfigured ? process.env.GEMINI_MODEL || "gemini-2.5-flash" : null,
+    geminiModel: geminiConfigured ? GEMINI_MODEL : null,
     byExtractor,
   };
 
