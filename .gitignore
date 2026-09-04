@@ -11,6 +11,10 @@
 # database
 *.db
 *.db-journal
+# ...except the pre-seeded snapshot that ships with the deployment. The app
+# only ever reads at request time, so a committed database is the whole
+# persistence story on Vercel. Re-seed it with `npm run db:seed`.
+!prisma/dev.db
 
 # env
 .env*.local
