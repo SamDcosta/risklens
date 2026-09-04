@@ -1,0 +1,93 @@
+{
+  "methodology": "OLS: dailyReturn_holding = alpha + betaMarket * dailyReturn_NIFTY50 + betaInfra * dailyReturn_NIFTYINFRA + error. Returns are log returns on daily closes. Dates are aligned by intersection across all three series per holding.",
+  "source": "Yahoo Finance chart API (query1.finance.yahoo.com), unauthenticated, no key required.",
+  "marketIndex": "^NSEI",
+  "infraIndex": "^CNXINFRA",
+  "computedAt": "2026-09-04T13:55:17.869Z",
+  "betas": [
+    {
+      "symbol": "KNRCON",
+      "name": "KNR Constructions",
+      "alpha": -0.0021023655933971367,
+      "seAlpha": 0.0010367661108352604,
+      "betaMarket": -0.3036043077371575,
+      "seBetaMarket": 0.2867915019659686,
+      "betaInfra": 1.2325865233181963,
+      "seBetaInfra": 0.2404247092657155,
+      "r2": 0.1749958486250358,
+      "sampleSize": 459,
+      "windowStart": "2024-09-05",
+      "windowEnd": "2026-09-04"
+    },
+    {
+      "symbol": "HGINFRA",
+      "name": "HG Infra Engineering",
+      "alpha": -0.002110827801610618,
+      "seAlpha": 0.0009651021052424551,
+      "betaMarket": 0.070327756312067,
+      "seBetaMarket": 0.2669677176176355,
+      "betaInfra": 1.2553432439018222,
+      "seBetaInfra": 0.22380591981127837,
+      "r2": 0.2920700712191612,
+      "sampleSize": 459,
+      "windowStart": "2024-09-05",
+      "windowEnd": "2026-09-04"
+    },
+    {
+      "symbol": "IRB",
+      "name": "IRB Infrastructure",
+      "alpha": -0.0010076992969328693,
+      "seAlpha": 0.0007877113944113727,
+      "betaMarket": -0.538197168348181,
+      "seBetaMarket": 0.21789768353533828,
+      "betaInfra": 1.528150577968149,
+      "seBetaInfra": 0.18266924526889602,
+      "r2": 0.3182677432100609,
+      "sampleSize": 459,
+      "windowStart": "2024-09-05",
+      "windowEnd": "2026-09-04"
+    },
+    {
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank",
+      "alpha": 0.0001269497767683634,
+      "seAlpha": 0.0003694885354599678,
+      "betaMarket": 1.6936041953383558,
+      "seBetaMarket": 0.10220836786264129,
+      "betaInfra": -0.5628151806992086,
+      "seBetaInfra": 0.08568390959790284,
+      "r2": 0.5930381999178007,
+      "sampleSize": 459,
+      "windowStart": "2024-09-05",
+      "windowEnd": "2026-09-04"
+    },
+    {
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries",
+      "alpha": -0.00023261724737873058,
+      "seAlpha": 0.0004173083418814864,
+      "betaMarket": -0.005818840379290258,
+      "seBetaMarket": 0.11543634084904647,
+      "betaInfra": 0.9786920519570481,
+      "seBetaInfra": 0.09677326035491583,
+      "r2": 0.5500717796198621,
+      "sampleSize": 459,
+      "windowStart": "2024-09-05",
+      "windowEnd": "2026-09-04"
+    },
+    {
+      "symbol": "NIFTYBEES",
+      "name": "Nifty 50 ETF",
+      "alpha": 0.00003268286613504316,
+      "seAlpha": 0.00006913069922631144,
+      "betaMarket": 0.8863812108924964,
+      "seBetaMarket": 0.019111092661730476,
+      "betaInfra": 0.037798456487635246,
+      "seBetaInfra": 0.0160186194828156,
+      "r2": 0.9660773432396899,
+      "sampleSize": 458,
+      "windowStart": "2024-09-05",
+      "windowEnd": "2026-09-04"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Note: SQLite has no native enum support in Prisma. Allowed values for the
+// string fields below (CounterpartyType, ExtractionSource, ShockProvenance)
+// are defined and validated in lib/types.ts / lib/dependencies.ts — not just
+// documented here.
+
+model Position {
+  id              String   @id @default(cuid())
+  symbol          String   @unique
+  name            String
+  sector          String
+  quantity        Int
+  price           Float
+  marketValue     Float
+  portfolioWeight Float
+  betaMarket      Float? // regressed vs NIFTY 50, from data/betas.json
+  betaInfra       Float? // regressed vs NIFTY Infrastructure, from data/betas.json
+  betaSource      String? // description of the regression run that produced the betas above
+
+  dependencies Dependency[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Counterparty {
+  id   String @id @default(cuid())
+  name String @unique
+  type String // GOVERNMENT_AGENCY | CORPORATE | REGULATOR
+
+  dependencies Dependency[]
+  shocks       Shock[]
+
+  createdAt DateTime @default(now())
+}
+
+// A dependency record with no sourceSpan must never be written. Enforced in
+// lib/dependencies.ts (createDependency), not left to callers to remember.
+model Dependency {
+  id              String  @id @default(cuid())
+  positionId      String
+  counterpartyId  String
+  revenueSharePct Float?
+  sourceDocument  String
+  sourceUrl       String?
+  sourceSpan      String // verbatim quote; must be a literal substring of sourceDocument's text where checkable
+  extractedBy     String // LLM | MANUAL
+  confidence      Float?
+
+  position     Position     @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  counterparty Counterparty @relation(fields: [counterpartyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([positionId])
+  @@index([counterpartyId])
+}
+
+model Shock {
+  id          String  @id @default(cuid())
+  label       String
+  description String? // fuller narrative, e.g. what actually happened in a HISTORICAL analogue
+  provenance  String // HISTORICAL | USER_DEFINED
+
+  // The counterparty this shock concerns. Positions with a Dependency row on
+  // this counterparty take the shock directly (multiplier 1); every other
+  // position takes it indirectly, scaled by its betaInfra.
+  counterpartyId String
+  counterparty   Counterparty @relation(fields: [counterpartyId], references: [id], onDelete: Cascade)
+
+  magnitudePct Float // the shock magnitude actually applied in impact calc (negative = drawdown)
+
+  // HISTORICAL provenance only:
+  sourceUrl           String?
+  eventDate           DateTime?
+  observedDrawdownPct Float?
+  windowDays          Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([counterpartyId])
+}

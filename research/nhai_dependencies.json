@@ -1,0 +1,40 @@
+{
+  "dependencies": [
+    {
+      "company": "KNR Constructions",
+      "ticker": "KNRCON",
+      "counterparty": "NHAI",
+      "sourceSpan": "KNR Constructions Limited has announced that it has received a Letter of Award from the National Highways Authority of India for a major highway expansion project in Telangana.",
+      "sourceDocument": "News brief: 'Rs 1,734 Crore NHAI Contract Awarded For Four-Laning Of 80-Km Stretch On Hyderabad-Panaji Highway In Telangana' (Swarajya, 28 March 2026), reporting KNR's exchange disclosure of the Letter of Award received on 27 March 2026 for the Gudebellur-Mahabubnagar (NH-167) HAM project",
+      "sourceUrl": "https://swarajyamag.com/news-brief/rs-1734-crore-nhai-contract-awarded-for-four-laning-of-80-km-stretch-on-hyderabad-panaji-highway-in-telangana",
+      "notes": "KNR's own Annual Report FY2023-24 PDF (https://www.knrcl.com/images/annual_reports/Annual_Report_2023-24.pdf) could not be extracted as text via automated fetch - it returns as an unparseable/scanned or heavily compressed PDF, so no verbatim span could be pulled directly from it despite repeated attempts. This news-brief span is a verbatim quote of an article reporting KNR's own exchange filing/announcement of an NHAI-awarded HAM contract (Rs 1,734 crore, 80.01 km, NH-167), which establishes NHAI as a direct client/counterparty. KNR has a long history of NHAI HAM/EPC awards (e.g. Rs 920 crore project in Tamil Nadu, 2019; Rs 482.04 crore project, 2018) per Business Standard archives, though those specific article pages returned HTTP 403 and could not be verbatim-quoted."
+    },
+    {
+      "company": "HG Infra Engineering",
+      "ticker": "HGINFRA",
+      "counterparty": "NHAI",
+      "sourceSpan": "A small-cap company in the business of engineering, procurement, and construction across highways, railways, metro, renewable energy, and transmission has announced that it emerged as the L1 bidder for a Rs 1,800 Cr NHAI six-lane access-controlled highway project in Odisha, after a bidding price 13 percent lower than the estimated cost.",
+      "sourceDocument": "News article: 'H.G. Infra: Company Bags Major Contract from NHAI; Check the Order Value' (Trade Brains, 25 Feb 2026)",
+      "sourceUrl": "https://tradebrains.in/h-g-infra-company-bags-major-contract-from-nhai-check-the-order-value/",
+      "notes": "HG Infra's Q4 & FY24 investor presentation PDF (https://www.hginfra.com/pdf/investor_presentation_q4_and_fy24_may_09_2024.pdf) and other HG Infra PDFs returned only digital-signature/certificate metadata when fetched (no extractable business-narrative text), so no verbatim span could be pulled directly from the company's own investor presentation or annual report despite repeated attempts. This news-article span verbatim-quotes a report of HG Infra's own exchange disclosure naming NHAI as the awarding authority for a Capital Region Ring Road Package-III project in Odisha, establishing NHAI as a direct client/counterparty. Separately, secondary/broker sources describe HG Infra's order book as dominated by road & highway EPC (64%, Rs 8,733 Cr as of Q3FY26 per search-aggregated broker commentary), but that figure is not independently verbatim-verified against a single fetchable primary document and is not used as the sourceSpan."
+    },
+    {
+      "company": "IRB Infrastructure Developers",
+      "ticker": "IRB",
+      "counterparty": "NHAI",
+      "sourceSpan": "VK-1 Expressway Private Ltd., a wholly-owned subsidiary and a Special Purpose Vehicle (SPV) of IRB Infrastructure Developers Ltd., has received an Appointed Date from NHAI for 23.740 Kms long Padra (Kim) – Vadodara Hybrid Annuity project, which is part of the upcoming Vadodara – Mumbai Expressway.",
+      "sourceDocument": "Official company press release: 'IRB Infra's SPV gets Appointed Date from NHAI for Gujarat HAM Project (Company's first HAM project to commence construction soon)', IRB Infrastructure Developers Ltd. media release, 18 Jan 2019",
+      "sourceUrl": "https://www.irb.co.in/home/2019/01/18/irb-infras-spv-gets-appointed-date-from-nhai-for-gujarat-ham-project-companys-first-ham-project-to-commence-construction-soon/",
+      "notes": "This is IRB's own official press release (hosted on irb.co.in), directly naming NHAI as the awarding authority and counterparty ('financial support of Rs. 817 Crores from the NHAI' is also stated later in the release for this HAM project). IRB's broader annual report PDFs (e.g. https://www.irb.co.in/home/wp-content/uploads/2021/09/Annual-Report.pdf) were not cleanly text-extractable via automated fetch, but IRB's order book is well documented (via aggregated broker/search sources) as containing multiple NHAI-awarded BOT/HAM/TOT road concessions, consistent with this press release."
+    }
+  ],
+  "historicalShock": {
+    "company": "PNC Infratech Ltd",
+    "ticker": "PNCINFRA",
+    "eventDescription": "PNC Infratech is a closely comparable NHAI-dependent NSE-listed road EPC/HAM/BOT developer (not one of the three focal companies). On 5-6 August 2026, NHAI took action against PNC Infratech's concessionaire subsidiary (Awadh Expressway) after a ~300-metre stretch of the newly-opened 63-km Kanpur-Lucknow Expressway suffered subsidence/slippage just 13 days after opening, following heavy rain. NHAI suspended toll collection on the corridor and separately issued a notice proposing to declare PNC Infratech a 'non-performer' (which would bar it from bidding on future NHAI tenders), along with a proposed 2% penalty on performance security and possible debarment of responsible officials for up to three years. PNC Infratech shares plunged more than 6% intraday to Rs 238.90 on 6 August 2026 (Thursday) when the news broke, and per a separate Business Today report the stock closed over 5% lower again in the following session (7 August 2026) as the non-performer notice details emerged - i.e., the stock fell sharply across two consecutive trading sessions on NHAI regulatory action tied directly to an NHAI-awarded/operated highway asset.",
+    "sourceUrl": "https://www.businesstoday.in/markets/stocks/story/pnc-infratech-shares-tumble-6-after-nhai-suspends-toll-collection-on-expressway-547644-2026-08-06",
+    "eventDate": "2026-08-06",
+    "observedDrawdownPct": -6,
+    "windowDays": 2
+  }
+}

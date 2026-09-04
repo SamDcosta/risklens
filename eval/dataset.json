@@ -1,0 +1,400 @@
+[
+  {
+    "id": "article-01",
+    "sourceUrl": "https://www.onmanorama.com/news/kerala/2025/05/22/nh66-collapse-central-government-debars-contractor-knr-construction.html",
+    "publisher": "Onmanorama",
+    "publishedDate": "2025-05-22",
+    "excerpt": "The Central Government has debarred KNR Constructions and its consultancy partner, Highway Engineering Consultancy (HEC), following the collapse of a section of the national highway at Kooriyad, according to a statement by Member of Parliament E T Muhammed Basheer.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["KNRCON"],
+      "entities": [
+        { "name": "KNR Constructions", "type": "COMPANY", "span": "KNR Constructions", "resolvesToSymbol": "KNRCON" },
+        { "name": "Highway Engineering Consultancy (HEC)", "type": "COUNTERPARTY", "span": "Highway Engineering Consultancy (HEC)", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI."
+  },
+  {
+    "id": "article-02",
+    "sourceUrl": "https://psuwatch.com/newsupdates/nhai-bans-knr-constructions-from-participating-in-ongoing-future-road-contracts-bidding",
+    "publisher": "PSU Watch",
+    "publishedDate": "2025-05-22",
+    "excerpt": "NHAI has disallowed M/s KNR Constructions Ltd from participating in ongoing/ future bidding forthwith.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["KNRCON"],
+      "entities": [
+        { "name": "NHAI", "type": "COUNTERPARTY", "span": "NHAI", "resolvesToSymbol": null },
+        { "name": "KNR Constructions Ltd", "type": "COMPANY", "span": "KNR Constructions Ltd", "resolvesToSymbol": "KNRCON" }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-03",
+    "sourceUrl": "https://www.businesstoday.in/markets/stocks/story/hg-infra-engineering-wins-rs-1582-crore-order-from-nhai-key-details-518421-2026-02-28",
+    "publisher": "Business Today",
+    "publishedDate": "2026-02-28",
+    "excerpt": "After market hours on Friday, the infrastructure major informed exchanges that it has received a letter of award (LOA) from NHAI for the construction of the new six-lane access-controlled capital region ring road package-III.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["HGINFRA"],
+      "entities": [
+        { "name": "the infrastructure major", "type": "COMPANY", "span": "the infrastructure major", "resolvesToSymbol": "HGINFRA" },
+        { "name": "NHAI", "type": "COUNTERPARTY", "span": "NHAI", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution."
+  },
+  {
+    "id": "article-04",
+    "sourceUrl": "https://www.angelone.in/news/stocks/irb-infrastructure-developers-share-price-in-focus-as-december-2025-toll-collections-rise-12-yoy",
+    "publisher": "Angel One",
+    "publishedDate": "2026-01-08",
+    "excerpt": "The group posted aggregate toll collections of ₹754 crore in December 2025, compared with ₹675 crore in the same month last year, reflecting a year-on-year increase of about 12%. The growth was recorded across IRB Infrastructure Developers Limited and its sponsored infrastructure investment trusts.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["IRB"],
+      "entities": [
+        { "name": "IRB Infrastructure Developers Limited", "type": "COMPANY", "span": "IRB Infrastructure Developers Limited", "resolvesToSymbol": "IRB" }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-05",
+    "sourceUrl": "https://gulfnews.com/business/markets/mukesh-ambani-announces-reliance-jio-ipo-for-2026-launches-ai-kamdhenu-initiative-1.500249863",
+    "publisher": "Gulf News",
+    "publishedDate": "2025-08-29",
+    "excerpt": "Today, it is my proud privilege to announce that Jio is making all arrangements to file its IPO. We are aiming to list Jio by the first half of 2026, subject to all necessary approvals.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["RELIANCE"],
+      "entities": [
+        { "name": "Jio", "type": "COMPANY", "span": "Jio", "resolvesToSymbol": "RELIANCE" }
+      ]
+    },
+    "note": "Hard case: this Mukesh Ambani quote names only 'Jio' (a Reliance Industries subsidiary/brand), never 'Reliance Industries' itself -- tests brand-to-parent alias resolution."
+  },
+  {
+    "id": "article-06",
+    "sourceUrl": "https://www.multibagg.ai/market-pulse/articles/knr-constructions-nhai-project-telangana-cmnaj8nkk8t8mpa0js283zyky",
+    "publisher": "Multibagg",
+    "publishedDate": "2026-03-28",
+    "excerpt": "KNR Constructions Limited has received a Letter of Award (LoA) from the National Highways Authority of India (NHAI) for a significant road development project in Telangana.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["KNRCON"],
+      "entities": [
+        { "name": "KNR Constructions Limited", "type": "COMPANY", "span": "KNR Constructions Limited", "resolvesToSymbol": "KNRCON" },
+        { "name": "National Highways Authority of India (NHAI)", "type": "COUNTERPARTY", "span": "National Highways Authority of India (NHAI)", "resolvesToSymbol": null }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-07",
+    "sourceUrl": "https://www.sahi.com/news/pnc-infratech-forms-new-subsidiary-for-1-174-crore-nhai-highway-project-in-uttar-pradesh-3740-PE1_COR",
+    "publisher": "Sahi",
+    "publishedDate": "2026-06-22",
+    "excerpt": "PNC Infratech Limited has formally incorporated a Special Purpose Vehicle (SPV) to execute a major road project in Uttar Pradesh. The new entity, Barabanki Mustafabad Highway Private Limited, will manage the ₹1,174 crore project awarded by the National Highways Authority of India (NHAI).",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "PNC Infratech Limited", "type": "COMPANY", "span": "PNC Infratech Limited", "resolvesToSymbol": null },
+        { "name": "National Highways Authority of India (NHAI)", "type": "COUNTERPARTY", "span": "National Highways Authority of India (NHAI)", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Out-of-universe test: PNC Infratech is a real NHAI road contractor but NOT one of our six holdings -- should be extracted as a COMPANY span but must NOT resolve to any holding symbol."
+  },
+  {
+    "id": "article-08",
+    "sourceUrl": "https://swarajyamag.com/news-brief/adani-group-firm-tops-bids-for-managing-124-km-national-highway-stretch-in-tamil-nadu-under-tot-model-with-rs-1692-crore-offer",
+    "publisher": "Swarajya",
+    "publishedDate": "2025-01-15",
+    "excerpt": "Adani Road Transport has emerged as the top bidder to manage a 124-km national highway stretch in Tamil Nadu under the toll-operate-transfer (TOT) model, with a Rs 1,692 crore offer. Adani Group's bid was followed by IRB Infrastructure Developers with Rs 1,485 crore.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["IRB"],
+      "entities": [
+        { "name": "Adani Road Transport", "type": "COMPANY", "span": "Adani Road Transport", "resolvesToSymbol": null },
+        { "name": "IRB Infrastructure Developers", "type": "COMPANY", "span": "IRB Infrastructure Developers", "resolvesToSymbol": "IRB" }
+      ]
+    },
+    "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe."
+  },
+  {
+    "id": "article-09",
+    "sourceUrl": "https://www.tribuneindia.com/news/business/sebi-approves-jio-platforms-ipo-company-plans-to-repay-rs-27500-crore-debt",
+    "publisher": "The Tribune",
+    "publishedDate": "2026-08-28",
+    "excerpt": "The Securities and Exchange Board of India (SEBI) has approved the initial public offering (IPO) of Jio Platforms, paving the way for the telecom and digital services arm of Reliance Industries, led by Mukesh Ambani, to proceed with its public issue.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["RELIANCE"],
+      "entities": [
+        { "name": "Securities and Exchange Board of India (SEBI)", "type": "REGULATOR", "span": "Securities and Exchange Board of India (SEBI)", "resolvesToSymbol": null },
+        { "name": "Jio Platforms", "type": "COMPANY", "span": "Jio Platforms", "resolvesToSymbol": "RELIANCE" },
+        { "name": "Reliance Industries", "type": "COMPANY", "span": "Reliance Industries", "resolvesToSymbol": "RELIANCE" }
+      ]
+    },
+    "note": "Tests that SEBI (a regulator outside our NHAI-only counterparty scope) is correctly typed as REGULATOR but not resolved, while both 'Jio Platforms' (subsidiary/brand) and 'Reliance Industries' (parent) in the same excerpt resolve to RELIANCE."
+  },
+  {
+    "id": "article-10",
+    "sourceUrl": "https://www.maritimegateway.com/irb-infra-sponsored-irb-invit-fund-completes-acquisition-of-three-highway-assets/",
+    "publisher": "Maritime Gateway",
+    "publishedDate": "2025-11-08",
+    "excerpt": "IRB Infrastructure Developers Limited, India's leading and the largest multi-national transport infrastructure developer in the highways sector glad to report that its Sponsored IRB InvIT Fund has successfully completed the acquisition of three highway assets from the IRB Infrastructure Trust.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["IRB"],
+      "entities": [
+        { "name": "IRB Infrastructure Developers Limited", "type": "COMPANY", "span": "IRB Infrastructure Developers Limited", "resolvesToSymbol": "IRB" },
+        { "name": "IRB InvIT Fund", "type": "COMPANY", "span": "IRB InvIT Fund", "resolvesToSymbol": "IRB" },
+        { "name": "IRB Infrastructure Trust", "type": "COMPANY", "span": "IRB Infrastructure Trust", "resolvesToSymbol": "IRB" }
+      ]
+    },
+    "note": "Tests multiple IRB-affiliated legal entity names (parent company, sponsored InvIT fund, and infrastructure trust) all correctly resolving to the same holding symbol."
+  },
+  {
+    "id": "article-11",
+    "sourceUrl": "https://www.tribuneindia.com/news/business/hdfc-bank-ceo-sashidhar-jagdishan-will-not-seek-reappointment-set-to-retire-on-october-26/",
+    "publisher": "The Tribune",
+    "publishedDate": "2026-08-29",
+    "excerpt": "Sashidhar Jagdishan, CEO of HDFC Bank, India's largest private-sector bank, has decided not to seek reappointment as the bank's MD and CEO, the lender said in an exchange filing on Saturday. According to the filing, Jagdishan is set to retire on October 26, 2026.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["HDFCBANK"],
+      "entities": [
+        { "name": "HDFC Bank", "type": "COMPANY", "span": "HDFC Bank", "resolvesToSymbol": "HDFCBANK" }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-12",
+    "sourceUrl": "https://www.constructionworld.in/transport-infrastructure/highways-and-roads-infrastructure/ashoka-buildcon-suspended-from-nhai-bids-after-girder-fall/82626",
+    "publisher": "Construction World",
+    "publishedDate": "2025-12-04",
+    "excerpt": "Ashoka Buildcon Ltd has been temporarily barred from participating in ongoing and future National Highways Authority of India (NHAI) tenders for one month, or until an Expert Committee concludes its investigation. The suspension follows an incident in which two precast PSC girders collapsed on the six-lane elevated corridor between Aroor and Thuravoor Thekku on NH-66.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "Ashoka Buildcon Ltd", "type": "COMPANY", "span": "Ashoka Buildcon Ltd", "resolvesToSymbol": null },
+        { "name": "National Highways Authority of India (NHAI)", "type": "COUNTERPARTY", "span": "National Highways Authority of India (NHAI)", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching."
+  },
+  {
+    "id": "article-13",
+    "sourceUrl": "https://inshorts.com/en/news/indigo-and-max-healthcare-enter-nifty-50-1759208564402",
+    "publisher": "Inshorts",
+    "publishedDate": "2025-09-30",
+    "excerpt": "InterGlobe Aviation (IndiGo) and Max Healthcare joined the Nifty 50 index on September 30, replacing IndusInd Bank and Hero MotoCorp.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "InterGlobe Aviation (IndiGo)", "type": "COMPANY", "span": "InterGlobe Aviation (IndiGo)", "resolvesToSymbol": null },
+        { "name": "Max Healthcare", "type": "COMPANY", "span": "Max Healthcare", "resolvesToSymbol": null },
+        { "name": "IndusInd Bank", "type": "COMPANY", "span": "IndusInd Bank", "resolvesToSymbol": null },
+        { "name": "Hero MotoCorp", "type": "COMPANY", "span": "Hero MotoCorp", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank."
+  },
+  {
+    "id": "article-14",
+    "sourceUrl": "https://www.storyboard18.com/brand-marketing/reliance-retail-revenue-rises-8-in-fy25-campa-cola-gains-double-digit-market-share-79878.htm",
+    "publisher": "Storyboard18",
+    "publishedDate": "2025-08-29",
+    "excerpt": "Reliance Retail's gross revenue grew 8% to Rs 3,30,943 crore ($38.7 billion), while EBITDA rose 8.6% to Rs 25,094 crore ($2.9 billion) in fiscal year 2025.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["RELIANCE"],
+      "entities": [
+        { "name": "Reliance Retail", "type": "COMPANY", "span": "Reliance Retail", "resolvesToSymbol": "RELIANCE" }
+      ]
+    },
+    "note": "Hard case: names the subsidiary 'Reliance Retail', not 'Reliance Industries' directly -- tests subsidiary-to-parent alias resolution."
+  },
+  {
+    "id": "article-15",
+    "sourceUrl": "https://upstox.com/news/market-news/stocks/tata-motors-demerger-to-infosys-buyback-top-corporate-developments-of-2025/article-186740/",
+    "publisher": "Upstox",
+    "publishedDate": "2025-12-24",
+    "excerpt": "One of India's largest restructurings in the auto sector took place this year; the Tata Motors demerger was the most talked-about spin-off of FY26. Tata Motors' CV business demerged into TMLCV and its existing PV business, Tata Motors Passenger Vehicles Limited (TMPV), was merged into Tata Motors (TML), the existing listed entity.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "Tata Motors", "type": "COMPANY", "span": "Tata Motors", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution)."
+  },
+  {
+    "id": "article-16",
+    "sourceUrl": "https://upstox.com/news/market-news/stocks/tata-motors-demerger-to-infosys-buyback-top-corporate-developments-of-2025/article-186740/",
+    "publisher": "Upstox",
+    "publishedDate": "2025-12-24",
+    "excerpt": "Infosys's board of directors approved its fifth and largest-ever share buyback worth ₹18,000 crore in September 2025 and fixed November 14, 2025, as the record date for the same. The programme, under which Infosys bought back 10 crore fully paid-up equity shares with a face value of ₹5 each at ₹1,800 per share, opened on November 20 and concluded on November 26.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "Infosys", "type": "COMPANY", "span": "Infosys", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Full negative: Infosys share buyback news, unrelated to our holdings or NHAI -- another baseline precision check, from the same source article as article-15 but a distinct excerpt/topic."
+  },
+  {
+    "id": "article-17",
+    "sourceUrl": "https://www.freepressjournal.in/business/irb-infrastructure-developers-shares-climb-7-on-the-bourses-after-company-bags-package-toll-operate-transfer-project-from-nhai-in-uttar-pradesh-for-9270-crore",
+    "publisher": "Free Press Journal",
+    "publishedDate": "2025-11-17",
+    "excerpt": "IRB Infrastructure Trust said it has bagged a package Toll Operate and Transfer (TOT) project from NHAI in Uttar Pradesh for an upfront consideration of Rs 9,270 crore.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["IRB"],
+      "entities": [
+        { "name": "IRB Infrastructure Trust", "type": "COMPANY", "span": "IRB Infrastructure Trust", "resolvesToSymbol": "IRB" },
+        { "name": "NHAI", "type": "COUNTERPARTY", "span": "NHAI", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Tests that 'IRB Infrastructure Trust' (a legal entity name distinct from 'IRB Infrastructure Developers Ltd') still resolves to the IRB holding."
+  },
+  {
+    "id": "article-18",
+    "sourceUrl": "https://www.businessupturn.com/finance/stock-market/irb-infrastructure-shares-in-focus-as-bombay-high-court-bars-mumbai-pune-expressway-from-recovering-rs-100-crore-from-irb-arm",
+    "publisher": "Business Upturn",
+    "publishedDate": "2026-06-09",
+    "excerpt": "The Mumbai-Pune Expressway remains IRB's largest toll-generating asset. IRB MP Expressway Pvt Ltd reported toll revenue of Rs 176.2 crore during May 2026, up from Rs 159.5 crore a year earlier.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["IRB"],
+      "entities": [
+        { "name": "IRB", "type": "COMPANY", "span": "IRB", "resolvesToSymbol": "IRB" },
+        { "name": "IRB MP Expressway Pvt Ltd", "type": "COMPANY", "span": "IRB MP Expressway Pvt Ltd", "resolvesToSymbol": "IRB" }
+      ]
+    },
+    "note": "Hard case: only the short-form 'IRB' plus the descriptive project name 'Mumbai-Pune Expressway' and an SPV name appear -- no full legal name 'IRB Infrastructure Developers Limited' in this excerpt, testing short-form/SPV alias resolution similar to the brief's 'Mumbai-Pune concessionaire' example."
+  },
+  {
+    "id": "article-19",
+    "sourceUrl": "https://www.whalesbook.com/news/English/other/Reliance-Industries-Market-Cap-Hits-indian-rupee18-Lakh-Crore-Milestone/6a47e8c4c5f6fc7a764def03",
+    "publisher": "Whalesbook",
+    "publishedDate": "2026-07-03",
+    "excerpt": "Reliance Industries Limited (RIL) has achieved a significant valuation milestone, with its market capitalization reaching approximately ₹18 lakh crore.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["RELIANCE"],
+      "entities": [
+        { "name": "Reliance Industries Limited (RIL)", "type": "COMPANY", "span": "Reliance Industries Limited (RIL)", "resolvesToSymbol": "RELIANCE" }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-20",
+    "sourceUrl": "https://www.moneylife.in/article/rbi-slaps-rs252-crore-penalty-on-icici-bank-axis-bank-bom-idbi-bank-and-bob/77046.html",
+    "publisher": "Moneylife",
+    "publishedDate": "2025-05-05",
+    "excerpt": "Reserve Bank of India (RBI) has imposed a penalty of Rs2.52 crore penalty on ICICI Bank Ltd, Axis Bank Ltd, Bank of Maharashtra (BoM), IDBI Bank Ltd and Bank of Baroda (BoB) for non-compliance with the directions issued by the banking regulator.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "Reserve Bank of India (RBI)", "type": "REGULATOR", "span": "Reserve Bank of India (RBI)", "resolvesToSymbol": null },
+        { "name": "ICICI Bank Ltd", "type": "COMPANY", "span": "ICICI Bank Ltd", "resolvesToSymbol": null },
+        { "name": "Axis Bank Ltd", "type": "COMPANY", "span": "Axis Bank Ltd", "resolvesToSymbol": null },
+        { "name": "Bank of Maharashtra (BoM)", "type": "COMPANY", "span": "Bank of Maharashtra (BoM)", "resolvesToSymbol": null },
+        { "name": "IDBI Bank Ltd", "type": "COMPANY", "span": "IDBI Bank Ltd", "resolvesToSymbol": null },
+        { "name": "Bank of Baroda (BoB)", "type": "COMPANY", "span": "Bank of Baroda (BoB)", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Full negative: RBI regulatory action against five OTHER banks, none of which is HDFC Bank -- a strong test that the extractor doesn't hallucinate an HDFC Bank match just because the pattern is 'RBI penalises a bank'."
+  },
+  {
+    "id": "article-21",
+    "sourceUrl": "https://swarajyamag.com/news-brief/lt-wins-major-contract-for-hyderabad-greenfield-radial-road-phase-2-project-to-link-orr-with-proposed-regional-ring-road",
+    "publisher": "Swarajya",
+    "publishedDate": "2025-12-30",
+    "excerpt": "Infrastructure major Larsen & Toubro (L&T) has announced that its transportation infrastructure division has secured a significant contract for Phase 2 of the Hyderabad Greenfield Radial Road project in Telangana.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": [],
+      "entities": [
+        { "name": "Larsen & Toubro (L&T)", "type": "COMPANY", "span": "Larsen & Toubro (L&T)", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Near-miss negative: a highway contract win in Hyderabad/Telangana (KNR Constructions' home base) that actually belongs to L&T, not KNR -- tests that geographic/sector similarity alone doesn't trigger a false match to KNRCON."
+  },
+  {
+    "id": "article-22",
+    "sourceUrl": "https://www.tribuneindia.com/news/business/hdfc-bank-gets-rbi-nod-to-raise-holding-in-indusind-bank-up-to-9-5/",
+    "publisher": "The Tribune",
+    "publishedDate": "2025-12-16",
+    "excerpt": "HDFC Bank has received approval from the Reserve Bank of India (RBI) to allow its group entities to collectively hold up to 9.50 per cent stake in IndusInd Bank, the bank informed the stock exchange in a filing.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["HDFCBANK"],
+      "entities": [
+        { "name": "HDFC Bank", "type": "COMPANY", "span": "HDFC Bank", "resolvesToSymbol": "HDFCBANK" },
+        { "name": "Reserve Bank of India (RBI)", "type": "REGULATOR", "span": "Reserve Bank of India (RBI)", "resolvesToSymbol": null },
+        { "name": "IndusInd Bank", "type": "COMPANY", "span": "IndusInd Bank", "resolvesToSymbol": null }
+      ]
+    },
+    "note": "Tests that IndusInd Bank (the target of HDFC Bank's stake purchase) is correctly extracted as a separate out-of-universe COMPANY and not confused with or resolved as HDFC Bank."
+  },
+  {
+    "id": "article-23",
+    "sourceUrl": "https://www.businesstoday.in/markets/stocks/story/hdfc-bank-q2-results-net-profit-jumps-11-to-rs-18641-crore-nii-sees-5-growth-498872-2025-10-18",
+    "publisher": "Business Today",
+    "publishedDate": "2025-10-18",
+    "excerpt": "HDFC Bank, India's largest private sector lender, on Saturday reported a 10.8 per cent year-on-year (YoY) rise in standalone net profit for the July–September quarter of FY26. The bank posted a profit after tax (PAT) of Rs 18,641.28 crore, compared to Rs 16,820.97 crore in the same period last year.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["HDFCBANK"],
+      "entities": [
+        { "name": "HDFC Bank", "type": "COMPANY", "span": "HDFC Bank", "resolvesToSymbol": "HDFCBANK" }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-24",
+    "sourceUrl": "https://www.newkerala.com/news/a/reliance-posts-record-revenue-ebitda-profit-fy26-despite-399.htm",
+    "publisher": "New Kerala",
+    "publishedDate": "2026-06-19",
+    "excerpt": "Reliance Industries posted record revenue, EBITDA and net profit in FY26 despite a challenging global environment marked by geopolitical tensions, supply chain disruptions and commodity price volatility, Chairman and Managing Director Mukesh Ambani said on Friday.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["RELIANCE"],
+      "entities": [
+        { "name": "Reliance Industries", "type": "COMPANY", "span": "Reliance Industries", "resolvesToSymbol": "RELIANCE" }
+      ]
+    },
+    "note": null
+  },
+  {
+    "id": "article-25",
+    "sourceUrl": "https://www.gurufocus.com/news/2602221/hg-infra-engineering-ltd-nsehginfra-q2-2025-earnings-call-highlights-strong-revenue-growth-and-expanding-order-book",
+    "publisher": "GuruFocus",
+    "publishedDate": "2024-11-14",
+    "excerpt": "H.G. Infra Engineering Ltd [NSE:HGINFRA] reported a 22.4% increase in revenue from operations in Q2 FY25, reaching INR1,064 crores compared to INR859 crores in Q2 FY24. The company has a strong order book totaling INR15,624 crores, with significant contributions from roads and highways, railways, and solar projects.",
+    "labeledAt": "2026-09-04",
+    "labels": {
+      "holdingsSymbols": ["HGINFRA"],
+      "entities": [
+        { "name": "H.G. Infra Engineering Ltd", "type": "COMPANY", "span": "H.G. Infra Engineering Ltd", "resolvesToSymbol": "HGINFRA" }
+      ]
+    },
+    "note": "Tests ticker-bracket notation '[NSE:HGINFRA]' co-occurring with the full company name in the same excerpt."
+  }
+]
