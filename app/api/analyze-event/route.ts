@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { analyzeEvent } from "@/lib/llm/analyzeEvent";
+import { analyzeEvent } from "@/lib/extract";
 
 const RequestSchema = z.object({
   text: z.string().min(1).max(20_000),

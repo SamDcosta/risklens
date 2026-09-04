@@ -9,11 +9,27 @@ interface HoldingRef {
 }
 
 interface AnalyzeResponse {
+  extractor?: "GEMINI" | "BASELINE";
   abstain: boolean;
   abstainReason?: string;
   eventTitle?: string;
   entities: { name: string; type: string; span: string; resolvedPositionSymbol: string | null }[];
   counterparties: { name: string; span: string; resolvedCounterpartyName: string | null }[];
+}
+
+// Which extractor produced a result is always shown. A rule-based matcher
+// must never be mistakable for a model.
+function ExtractorBadge({ extractor }: { extractor: "GEMINI" | "BASELINE" }) {
+  const isLlm = extractor === "GEMINI";
+  return (
+    <span
+      className={`rounded-full border px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide ${
+        isLlm ? "border-ok/50 bg-ok/10 text-ok" : "border-accent/50 bg-accent/10 text-accent"
+      }`}
+    >
+      {isLlm ? "Gemini · LLM" : "Alias matcher · no LLM"}
+    </span>
+  );
 }
 
 const SAMPLE_TEXT =
@@ -117,6 +133,11 @@ export function EventAnalysisSection({
 
           {result && (
             <div className="mt-6 rounded border border-border bg-bg-panel p-4">
+              {result.extractor && (
+                <div className="mb-3">
+                  <ExtractorBadge extractor={result.extractor} />
+                </div>
+              )}
               {result.abstain ? (
                 <p className="text-sm text-text-dim">
                   <span className="font-medium text-text">Could not analyse.</span>{" "}

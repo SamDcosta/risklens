@@ -17,17 +17,16 @@ behind a shared dependency. It does not predict what will happen to it. **This i
 
 ```bash
 npm install
-cp .env.example .env          # DATABASE_URL is already filled in; ANTHROPIC_API_KEY is optional
+cp .env.example .env          # DATABASE_URL is already filled in; GEMINI_API_KEY is optional
 npm run db:push               # create the SQLite schema
 npm run estimate-betas        # pulls ~2y of daily closes from Yahoo Finance, writes data/betas.json
 npm run db:seed               # seeds positions, counterparty dependency rows, and historical shocks
 npm run dev
 ```
 
-Without `ANTHROPIC_API_KEY` set, `/api/analyze-event` still runs its full validation, span-containment, and
-alias-resolution logic — it just returns `{ abstain: true, abstainReason: "ANTHROPIC_API_KEY is not
-configured..." }` instead of calling a model. Set the key and re-run `npm run eval` for real extraction
-metrics.
+`GEMINI_API_KEY` (free, from [aistudio.google.com/apikey](https://aistudio.google.com/apikey)) is optional.
+Without it, `/api/analyze-event` falls back to the deterministic alias matcher instead of calling a model —
+the endpoint still works, and the UI always labels which extractor produced a result.
 
 ### Changing the data and re-running everything
 
@@ -147,13 +146,31 @@ shown as **separate columns**, never summed — see [`lib/engine/impact.ts`](lib
 ## The LLM's job — and only this
 
 `POST /api/analyze-event` does extraction and linking, nothing else. It never receives portfolio values and
-never emits a number, probability, or severity. Temperature 0, forced tool-use for strict JSON schema
-validity. Every entity's `span` is checked against the input text with a plain string-containment check *in
-code* (`lib/llm/analyzeEvent.ts`'s `filterByContainment`) — an entity surviving a well-crafted prompt but
-failing this check is still dropped before it reaches the UI. Parse failure, timeout, or malformed output
-all resolve to `abstain: true` rather than a partial result. Resolution from extracted names to our own
-Position/Counterparty rows is a deterministic alias lookup (`lib/aliases.ts`), not another model call;
-unresolved entities are logged, not silently dropped.
+never emits a number, probability, or severity. Temperature 0, with a strict `responseSchema` that has no
+numeric fields to fill in even if the model wanted to. Every entity's `span` is checked against the input
+text with a plain string-containment check *in code* (`filterByContainment` in
+[`lib/extract/shared.ts`](lib/extract/shared.ts)) — an entity that survives a well-crafted prompt but fails
+this check is still dropped before it reaches the UI. Resolution from extracted names to our own
+Position/Counterparty rows is a deterministic alias lookup ([`lib/aliases.ts`](lib/aliases.ts)), not another
+model call; unresolved entities are logged, not silently dropped.
+
+### Two extractors, always labelled
+
+- **`GEMINI`** ([`lib/extract/gemini.ts`](lib/extract/gemini.ts)) — Gemini via `@google/genai`, used when
+  `GEMINI_API_KEY` is set.
+- **`BASELINE`** ([`lib/extract/baseline.ts`](lib/extract/baseline.ts)) — a rule-based matcher that scans for
+  names in our own alias table. No model, no key, no cost. It exists as an honest comparison point, **not**
+  as a stand-in for a model: it can only find names it was given, so it fails by construction on indirect
+  references, which is exactly what the eval quantifies.
+
+Both go through the identical containment check and alias resolution, and every result carries which
+extractor produced it — shown as a badge in the UI, and reported separately in the eval. A regex must never
+be mistakable for a model.
+
+A distinction the eval takes seriously: **a failure is not an abstention.** A quota error or timeout means
+no response was obtained and says nothing about extraction quality, so those items are excluded from the
+quality metrics and reported as `errorRate`/`coverage` instead. Only a model that was actually reached and
+declined counts toward `abstentionRate`.
 
 ---
 
@@ -216,5 +233,11 @@ a >10% counterparty exists, never *which one*.
 - Shock magnitudes are either historical analogues or explicit user assumptions — never a model-estimated
   probability or severity.
 - Entity extraction is evaluated on a small hand-labeled set of short excerpts (see
-  [Evaluation](#evaluation)), not a large benchmark.
+  [Evaluation](#evaluation)), not a large benchmark. 25 items is enough to surface named failure modes, not
+  enough for tight confidence intervals — read the metrics as directional.
+- The deployed data is a snapshot: `prisma/dev.db` is committed pre-seeded, so prices and betas are frozen at
+  the last `npm run data:refresh`, not live.
+- Gemini runs on a free-tier key with per-minute quotas, so a full eval run is paced and can still hit
+  rate limits; those items are reported as errors and excluded from quality metrics rather than being
+  silently folded in as abstentions.
 - **This tool measures exposure. It does not predict outcomes and is not investment advice.**

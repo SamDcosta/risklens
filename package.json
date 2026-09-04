@@ -9,12 +9,12 @@
     "lint": "eslint",
     "estimate-betas": "tsx scripts/estimate_betas.ts",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts",
-    "eval": "tsx eval/run.ts",
+    "db:seed": "tsx --env-file-if-exists=.env prisma/seed.ts",
+    "eval": "tsx --env-file-if-exists=.env eval/run.ts",
     "data:refresh": "npm run estimate-betas && npm run db:push && npm run db:seed && npm run eval"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.123.0",
+    "@google/genai": "^2.21.0",
     "@prisma/client": "6.19.3",
     "next": "16.3.4",
     "prisma": "6.19.3",
