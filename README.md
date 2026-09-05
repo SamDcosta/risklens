@@ -169,17 +169,27 @@ be mistakable for a model.
 
 ### Budget guarding on a public endpoint
 
-The deployed endpoint is public and the API key is server-side, so without a ceiling anyone could spend the
-quota. [`lib/rateLimit.ts`](lib/rateLimit.ts) caps model calls at 5/minute per IP and 150/day overall, and
-input is capped at 4,000 characters.
+The deployed endpoint is public and the API key is server-side, so anyone who finds the URL can spend the
+project's Gemini quota. Two mitigations ship, and it's worth being precise about how much each one actually
+buys, because they are not equal.
 
-Over-budget requests are **served by the baseline extractor rather than rejected**. A demo that returns 429s
-to whoever is evaluating it is worse than one that degrades transparently — and since every response already
-carries its extractor badge, the downgrade is visible rather than silent, with a note explaining why.
+**What reliably holds:**
 
-This is in-memory and therefore per-instance: serverless instances don't share state, so it's a ceiling on
-casual abuse and a budget guard, not a security boundary. Anything stronger needs a shared store (Vercel KV,
-Upstash), which isn't worth another dependency here.
+- Input is capped at 4,000 characters — oversized requests get a 400 before any model call happens.
+- **Graceful degradation is the load-bearing protection.** If the model path is unavailable for any reason —
+  quota gone, rate limited, API down — the request is served by the baseline extractor instead of failing.
+  Every response carries its extractor badge, so the downgrade is visible rather than silent, with a note
+  explaining why. This is what makes quota exhaustion a cosmetic problem rather than a broken demo.
+
+**What barely holds:** [`lib/rateLimit.ts`](lib/rateLimit.ts) caps model calls at 5/minute per IP and 150/day,
+but it is in-memory and Vercel routes consecutive requests to *different* serverless instances — measured on
+this deployment, four consecutive requests hit four distinct instances. Each one therefore starts with an
+empty counter, and a burst sails straight through. It works locally and under sustained load against one warm
+instance; it is close to useless against exactly the casual abuse it was written for.
+
+Making it real requires shared state (Vercel KV, Upstash Redis) — deliberately not added here, because on a
+free tier the cost of exhausted quota is a demo that shows the baseline extractor rather than a bill. It is
+documented as measured rather than as intended.
 
 A distinction the eval takes seriously: **a failure is not an abstention.** A quota error or timeout means
 no response was obtained and says nothing about extraction quality, so those items are excluded from the

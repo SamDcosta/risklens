@@ -5,12 +5,18 @@
  * project's Gemini quota — and the realistic cost isn't a bill (the free tier
  * has none), it's the demo returning errors because the quota is gone.
  *
- * This is in-memory and therefore per-instance: serverless instances don't
- * share state, so a distributed caller could exceed these numbers. It is
- * deliberately not a security boundary — it's a ceiling on casual abuse and a
- * budget guard, which is the actual threat here. Anything stronger needs a
- * shared store (Vercel KV, Upstash), which isn't worth another dependency for
- * a demo.
+ * IMPORTANT, measured rather than assumed: this is in-memory, and Vercel
+ * routes consecutive requests to different serverless instances — four
+ * consecutive requests to this deployment hit four distinct instances. Each
+ * starts with an empty counter, so a burst passes straight through. This
+ * limiter works locally and against a single warm instance under sustained
+ * load; in production it stops far less than its numbers suggest.
+ *
+ * The protection actually carrying weight is the caller's fallback to the
+ * baseline extractor, which makes an exhausted quota a cosmetic downgrade
+ * rather than a broken endpoint. Real limiting needs shared state (Vercel KV,
+ * Upstash); not added here because on a free tier the downside is a demo
+ * showing the baseline, not a bill.
  */
 
 const PER_IP_LIMIT = 5;
