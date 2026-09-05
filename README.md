@@ -11,6 +11,9 @@ failure.
 **The headline claim is exposure measurement, not loss prediction.** RiskLens reports how much capital sits
 behind a shared dependency. It does not predict what will happen to it. **This is not investment advice.**
 
+📐 **[Architecture](docs/ARCHITECTURE.md)** — the build-time/request-time split, the dual-extractor pipeline,
+why the benchmark bypasses the dispatcher, and the one gap still open.
+
 ---
 
 ## Setup
