@@ -1,12 +1,13 @@
 # RiskLens
 
-A portfolio exposure tool that surfaces **shared counterparty dependencies** — risks that cross sector
-boundaries and are therefore invisible to every sector-based portfolio view.
+A portfolio exposure tool that surfaces **shared counterparty dependencies** — the single points of failure
+that a sector view reports only as category correlation.
 
 The motivating case: KNR Constructions, HG Infra Engineering and IRB Infrastructure are three separate
 tickers in three separate positions. All three depend on NHAI (National Highways Authority of India) tender
-awards. A sector view calls that "infrastructure exposure." A counterparty view calls it a single point of
-failure.
+awards. A sector view calls that "45% infrastructure." It does not tell you that one agency's tender
+decisions land on all three positions at once. Being in the same category is not the same fact as answering
+to the same payer, and only the second one is a single point of failure.
 
 **The headline claim is exposure measurement, not loss prediction.** RiskLens reports how much capital sits
 behind a shared dependency. It does not predict what will happen to it. **This is not investment advice.**
@@ -281,6 +282,18 @@ a >10% counterparty exists, never *which one*.
 
 ## Limitations
 
+- **Every seeded NHAI dependency sits inside one sector.** KNRCON, HGINFRA and IRB are all
+  `Infrastructure (Roads & Highways)`, so this build demonstrates the *shared-counterparty* case, not the
+  *cross-sector* one. The data model supports cross-sector dependencies — `Counterparty` and `Dependency`
+  are independent of `Position.sector`, and nothing in the exposure arithmetic looks at sector at all — but
+  no current, materially-dependent, quotably-sourced non-infrastructure holding was found to seed.
+  Candidates were considered and rejected on evidence rather than convenience: FASTag-issuing banks have the
+  NHAI authorisation but at immaterial revenue share; cement, steel and equipment suppliers sell to the
+  *contractor*, not to NHAI; road-HAM lenders are exposed to borrowers rather than to NHAI directly. One97
+  Communications (Paytm) initially looked ideal — roughly 30% FASTag market share, removed from NHAI's
+  authorised issuer list — until verification showed Paytm Payments Bank was a separate entity, licence
+  cancelled in April 2026 and wound up in July 2026, leaving the listed company with no current dependency.
+  Seeding it would have been a fabricated row, which is the failure mode this project is built against.
 - Single portfolio, six holdings, seeded once — not a live brokerage integration.
 - Betas are estimated from a ~2-year daily-return window against two index proxies; several holdings have
   weak R² and wide standard errors (shown in the UI, not hidden).

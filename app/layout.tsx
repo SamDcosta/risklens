@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "RiskLens — counterparty exposure",
-  description: "Portfolio exposure tool that surfaces shared counterparty dependencies across sector boundaries.",
+  description:
+    "Portfolio exposure tool that surfaces shared counterparty dependencies — the single points of failure a sector view reports only as category correlation.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
