@@ -167,6 +167,20 @@ Both go through the identical containment check and alias resolution, and every 
 extractor produced it — shown as a badge in the UI, and reported separately in the eval. A regex must never
 be mistakable for a model.
 
+### Budget guarding on a public endpoint
+
+The deployed endpoint is public and the API key is server-side, so without a ceiling anyone could spend the
+quota. [`lib/rateLimit.ts`](lib/rateLimit.ts) caps model calls at 5/minute per IP and 150/day overall, and
+input is capped at 4,000 characters.
+
+Over-budget requests are **served by the baseline extractor rather than rejected**. A demo that returns 429s
+to whoever is evaluating it is worse than one that degrades transparently — and since every response already
+carries its extractor badge, the downgrade is visible rather than silent, with a note explaining why.
+
+This is in-memory and therefore per-instance: serverless instances don't share state, so it's a ceiling on
+casual abuse and a budget guard, not a security boundary. Anything stronger needs a shared store (Vercel KV,
+Upstash), which isn't worth another dependency here.
+
 A distinction the eval takes seriously: **a failure is not an abstention.** A quota error or timeout means
 no response was obtained and says nothing about extraction quality, so those items are excluded from the
 quality metrics and reported as `errorRate`/`coverage` instead. Only a model that was actually reached and

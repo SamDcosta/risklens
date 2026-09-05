@@ -64,6 +64,8 @@ export interface ExtractionResult {
    */
   failed?: boolean;
   eventTitle?: string;
+  /** Set when the model path was skipped (rate limit / budget) and this is the fallback. */
+  fallbackNote?: string;
   entities: ResolvedEntity[];
   counterparties: ResolvedCounterparty[];
   /** Counts before the containment filter, so hallucination rate is measurable in eval. */

@@ -1,8 +1,11 @@
 import { z } from "zod";
 import { analyzeEvent } from "@/lib/extract";
+import { checkLlmBudget, clientIpFrom } from "@/lib/rateLimit";
 
+// A news snippet worth analysing is a few paragraphs, not a novel. The old
+// 20k ceiling was an invitation to burn tokens on a public endpoint.
 const RequestSchema = z.object({
-  text: z.string().min(1).max(20_000),
+  text: z.string().min(1).max(4_000),
 });
 
 export async function POST(request: Request) {
@@ -21,6 +24,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const result = await analyzeEvent(parsed.data.text);
+  // Over budget serves the local extractor rather than an error: the endpoint
+  // is public, and a demo that returns 429s to a judge is worse than one that
+  // transparently degrades to the baseline.
+  const { llmAllowed, reason } = checkLlmBudget(clientIpFrom(request));
+
+  const result = await analyzeEvent(parsed.data.text, { allowLlm: llmAllowed, fallbackNote: reason });
   return Response.json(result);
 }

@@ -12,6 +12,7 @@ interface AnalyzeResponse {
   extractor?: "GEMINI" | "BASELINE";
   abstain: boolean;
   abstainReason?: string;
+  fallbackNote?: string;
   eventTitle?: string;
   entities: { name: string; type: string; span: string; resolvedPositionSymbol: string | null }[];
   counterparties: { name: string; span: string; resolvedCounterpartyName: string | null }[];
@@ -137,6 +138,11 @@ export function EventAnalysisSection({
                 <div className="mb-3">
                   <ExtractorBadge extractor={result.extractor} />
                 </div>
+              )}
+              {result.fallbackNote && (
+                <p className="mb-3 rounded border border-accent/40 bg-accent/10 px-3 py-2 text-xs text-accent">
+                  {result.fallbackNote}
+                </p>
               )}
               {result.abstain ? (
                 <p className="text-sm text-text-dim">
