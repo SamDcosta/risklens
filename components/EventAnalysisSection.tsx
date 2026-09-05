@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { ExposureGraph } from "./ExposureGraph";
 
+// Mirrors the server's cap so the limit is unreachable by accident rather
+// than surfaced as a validation error after a round trip.
+const MAX_INPUT_CHARS = 4_000;
+
 interface HoldingRef {
   symbol: string;
   name: string;
@@ -120,8 +124,19 @@ export function EventAnalysisSection({
             onChange={(e) => setText(e.target.value)}
             placeholder="Paste article text here..."
             rows={5}
+            maxLength={MAX_INPUT_CHARS}
             className="mt-4 w-full rounded border border-border bg-bg-inset p-3 text-sm text-text placeholder:text-text-faint focus:border-accent focus:outline-none"
           />
+          <div className="mt-1 flex justify-end">
+            <span
+              className={`mono-num text-xs ${
+                text.length >= MAX_INPUT_CHARS ? "text-accent" : "text-text-faint"
+              }`}
+            >
+              {text.length.toLocaleString()} / {MAX_INPUT_CHARS.toLocaleString()}
+              {text.length >= MAX_INPUT_CHARS && " — paste the relevant paragraphs, not a whole article"}
+            </span>
+          </div>
           <div className="mt-3 flex items-center gap-3">
             <button
               onClick={analyze}

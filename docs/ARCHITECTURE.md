@@ -97,7 +97,7 @@ flowchart TB
     VAL -->|"valid"| BUD
     BUD -->|"within budget"| GEM
     BUD -->|"over budget / no key"| BASE
-    GEM -.->|"NO FALLBACK on runtime failure — known gap"| BASE
+    GEM -.->|"failed: no response obtained → degrade"| BASE
     GEM --> FIN
     BASE --> FIN
     FIN --> RESULT
@@ -108,7 +108,8 @@ flowchart TB
 containment filter and alias resolution, so a fabricated span cannot reach the UI regardless of which
 extractor produced it — and swapping the model can't accidentally bypass the check.
 
-The dotted edge is the one that **doesn't exist**. See [Known gap](#known-gap).
+The dotted edge is the degradation path: a model that couldn't be reached at all hands the request to the
+baseline rather than returning an error. See [Degradation](#degradation-and-a-gap-that-used-to-be-here).
 
 ---
 
@@ -141,22 +142,26 @@ nothing about extraction quality, so those items are excluded from the quality m
 
 ---
 
-## Known gap
+## Degradation, and a gap that used to be here
 
-**Runtime model failures have no fallback path.**
+Earlier versions only fell back to the baseline on the *pre-emptive* budget check. If Gemini was actually
+called and then failed — a real 429, a timeout, a network error — the failed result was passed straight
+through, and the user saw *"Could not analyse: Extraction failed: 429…"*.
 
-The switch to the baseline extractor fires only on the *pre-emptive* budget check. If Gemini is actually
-called and then fails — a real 429, a timeout, a network error — `analyzeEventGemini` returns a failed result
-and the dispatcher passes it straight through.
+That meant the budget guard covered the failure it predicted but not the one that actually happens, which
+was the wrong way round: the in-memory limiter barely fires in production (Vercel routes consecutive
+requests to different instances — measured, four requests hit four distinct instances), so a genuine quota
+exhaustion was the likely path, and it was the unhandled one.
 
-So the scenario the budget guard was written for (quota exhausted during judging) still surfaces as
-*"Could not analyse: Extraction failed: 429…"*. The in-memory limiter won't intercept it first, because it
-barely fires in production — Vercel routes consecutive requests to different instances, so its counter
-restarts almost every time (measured: four consecutive requests hit four distinct instances).
+Both paths now degrade. The dispatcher inspects `result.failed` after the model call and falls through to
+the baseline with a note naming the cause. The distinction that matters is preserved:
 
-The fix is roughly five lines: inspect `result.failed` after the model call and fall through to the baseline
-with an explanatory note, exactly as the budget path already does. Documented here rather than quietly left
-in the code.
+- **Reached and declined** → a real answer, kept as an abstention.
+- **Never reached** (quota, timeout, network) → not an answer, so the deterministic extractor serves the
+  request instead, labelled.
+
+The result is that no single failure can produce an error screen for a visitor — the worst case is a visibly
+downgraded answer.
 
 ---
 
