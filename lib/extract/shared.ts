@@ -44,6 +44,8 @@ export interface ResolvedEntity {
   type: EntityType;
   span: string;
   resolvedPositionSymbol: string | null;
+  /** A known counterparty (e.g. NHAI) is not a holding but is still resolvable. */
+  resolvedCounterpartyName: string | null;
 }
 
 export interface ResolvedCounterparty {
@@ -91,14 +93,17 @@ export function filterByContainment(raw: RawExtraction, inputText: string): RawE
 
 /** Deterministic lookup against our own alias table — never another model call. */
 export function resolveEntities(raw: RawExtraction, extractor: Extractor): ExtractionResult {
+  // Every entity is tried against both tables. An entity typed COUNTERPARTY or
+  // REGULATOR can't resolve to a holding, but it may well be a counterparty we
+  // know — reporting "unresolved" when the alias table has the mapping is just
+  // failing to look it up.
   const entities: ResolvedEntity[] = raw.entitiesMentioned.map((e) => {
     const resolvedPositionSymbol = resolvePositionAlias(e.name);
-    // Only COMPANY entities are expected to resolve to a position; a
-    // counterparty or regulator resolving to null here is normal, not a miss.
-    if (!resolvedPositionSymbol && e.type === "COMPANY") {
+    const resolvedCounterpartyName = resolveCounterpartyAlias(e.name);
+    if (!resolvedPositionSymbol && !resolvedCounterpartyName && e.type === "COMPANY") {
       console.warn(`[analyze-event/${extractor}] unresolved company: "${e.name}"`);
     }
-    return { ...e, resolvedPositionSymbol };
+    return { ...e, resolvedPositionSymbol, resolvedCounterpartyName };
   });
 
   const counterparties: ResolvedCounterparty[] = raw.counterpartiesImplicated.map((c) => {
@@ -108,6 +113,24 @@ export function resolveEntities(raw: RawExtraction, extractor: Extractor): Extra
     }
     return { ...c, resolvedCounterpartyName };
   });
+
+  // The model is inconsistent about populating counterpartiesImplicated — it
+  // sometimes reports NHAI only under entities. Whether a counterparty is
+  // "implicated" is our determination to make from our own table, not
+  // something to leave to the model's mood, so a known counterparty found
+  // among the entities is promoted here. The span still came from the model
+  // and still passed containment; only the classification is ours.
+  const alreadyLinked = new Set(counterparties.map((c) => c.resolvedCounterpartyName).filter(Boolean));
+  for (const entity of entities) {
+    if (entity.resolvedCounterpartyName && !alreadyLinked.has(entity.resolvedCounterpartyName)) {
+      counterparties.push({
+        name: entity.name,
+        span: entity.span,
+        resolvedCounterpartyName: entity.resolvedCounterpartyName,
+      });
+      alreadyLinked.add(entity.resolvedCounterpartyName);
+    }
+  }
 
   return { extractor, abstain: raw.abstain, eventTitle: raw.eventTitle, entities, counterparties };
 }

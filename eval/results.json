@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-09-04T23:00:27.733Z",
+  "runAt": "2026-09-05T20:42:34.719Z",
   "datasetSize": 25,
   "geminiConfigured": true,
   "geminiModel": "gemini-3.5-flash-lite",
@@ -673,24 +673,24 @@
       "metrics": {
         "coverage": 1,
         "errorRate": 0,
-        "entityPrecision": 0.6197183098591549,
-        "entityRecall": 0.9166666666666666,
-        "counterpartyLinkingAccuracy": 0.8,
+        "entityPrecision": 0.6923076923076923,
+        "entityRecall": 0.9375,
+        "counterpartyLinkingAccuracy": 0.84,
         "hallucinationRate": 0,
         "abstentionRate": 0,
-        "unresolvedEntityRate": 0.7887323943661971
+        "unresolvedEntityRate": 0.7538461538461538
       },
       "itemResults": [
         {
           "id": "article-01",
           "abstained": false,
           "failed": false,
-          "predictedEntityCount": 5,
+          "predictedEntityCount": 3,
           "groundTruthEntityCount": 2,
-          "matchedSpans": 2,
-          "unresolvedPredicted": 4,
+          "matchedSpans": 1,
+          "unresolvedPredicted": 2,
           "counterpartyLinkingCorrect": false,
-          "rawEntityCount": 5,
+          "rawEntityCount": 3,
           "droppedForContainment": 0,
           "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI.",
           "missedSpans": [
@@ -698,8 +698,6 @@
           ],
           "extraUnresolvedSpans": [
             "Highway Engineering Consultancy",
-            "HEC",
-            "KNR Constructions",
             "Highway Engineering Consultancy"
           ]
         },
@@ -709,10 +707,10 @@
           "failed": false,
           "predictedEntityCount": 3,
           "groundTruthEntityCount": 2,
-          "matchedSpans": 1,
-          "unresolvedPredicted": 3,
-          "counterpartyLinkingCorrect": false,
-          "rawEntityCount": 3,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 2,
+          "counterpartyLinkingCorrect": true,
+          "rawEntityCount": 2,
           "droppedForContainment": 0,
           "note": null,
           "missedSpans": [
@@ -720,7 +718,6 @@
           ],
           "extraUnresolvedSpans": [
             "NHAI",
-            "M/s KNR Constructions Ltd",
             "M/s KNR Constructions Ltd"
           ]
         },
@@ -733,7 +730,7 @@
           "matchedSpans": 2,
           "unresolvedPredicted": 1,
           "counterpartyLinkingCorrect": true,
-          "rawEntityCount": 2,
+          "rawEntityCount": 1,
           "droppedForContainment": 0,
           "note": "Hard case: HG Infra Engineering is referred to only as 'the infrastructure major' plus a distinctive project name ('capital region ring road package-III') -- no literal company name appears in this excerpt, testing indirect-reference resolution.",
           "missedSpans": [
@@ -783,17 +780,15 @@
           "failed": false,
           "predictedEntityCount": 3,
           "groundTruthEntityCount": 2,
-          "matchedSpans": 1,
+          "matchedSpans": 3,
           "unresolvedPredicted": 1,
           "counterpartyLinkingCorrect": false,
           "rawEntityCount": 3,
           "droppedForContainment": 0,
           "note": null,
-          "missedSpans": [
-            "National Highways Authority of India (NHAI)"
-          ],
+          "missedSpans": [],
           "extraUnresolvedSpans": [
-            "National Highways Authority of India"
+            "National Highways Authority of India (NHAI)"
           ]
         },
         {
@@ -821,19 +816,18 @@
           "id": "article-08",
           "abstained": false,
           "failed": false,
-          "predictedEntityCount": 4,
+          "predictedEntityCount": 3,
           "groundTruthEntityCount": 2,
-          "matchedSpans": 3,
-          "unresolvedPredicted": 3,
+          "matchedSpans": 2,
+          "unresolvedPredicted": 2,
           "counterpartyLinkingCorrect": true,
-          "rawEntityCount": 4,
+          "rawEntityCount": 3,
           "droppedForContainment": 0,
           "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe.",
           "missedSpans": [],
           "extraUnresolvedSpans": [
             "Adani Road Transport",
-            "Adani Group",
-            "IRB Infrastructure Developers"
+            "Adani Group"
           ]
         },
         {
@@ -900,7 +894,7 @@
           "matchedSpans": 1,
           "unresolvedPredicted": 2,
           "counterpartyLinkingCorrect": false,
-          "rawEntityCount": 3,
+          "rawEntityCount": 2,
           "droppedForContainment": 0,
           "note": "Out-of-universe / near-miss test: Ashoka Buildcon is a real NHAI road contractor debarred in a story structurally identical to our KNR Constructions debarment items -- tests that the extractor doesn't mis-resolve a same-shaped 'NHAI contractor suspended' story to KNRCON/HGINFRA/IRB just by pattern-matching.",
           "missedSpans": [
@@ -915,12 +909,12 @@
           "id": "article-13",
           "abstained": false,
           "failed": false,
-          "predictedEntityCount": 5,
+          "predictedEntityCount": 4,
           "groundTruthEntityCount": 4,
           "matchedSpans": 3,
-          "unresolvedPredicted": 5,
+          "unresolvedPredicted": 4,
           "counterpartyLinkingCorrect": true,
-          "rawEntityCount": 5,
+          "rawEntityCount": 4,
           "droppedForContainment": 0,
           "note": "Hard negative case: mentions the Nifty 50 INDEX (a constituent rejig) and IndusInd Bank -- tests that the extractor doesn't conflate index-level news with the NIFTYBEES ETF holding (the index is not the ETF security itself), and doesn't confuse IndusInd Bank with HDFC Bank.",
           "missedSpans": [
@@ -928,7 +922,6 @@
           ],
           "extraUnresolvedSpans": [
             "InterGlobe Aviation",
-            "IndiGo",
             "Max Healthcare",
             "IndusInd Bank",
             "Hero MotoCorp"
@@ -955,12 +948,12 @@
           "id": "article-15",
           "abstained": false,
           "failed": false,
-          "predictedEntityCount": 6,
+          "predictedEntityCount": 4,
           "groundTruthEntityCount": 1,
           "matchedSpans": 2,
-          "unresolvedPredicted": 6,
+          "unresolvedPredicted": 4,
           "counterpartyLinkingCorrect": true,
-          "rawEntityCount": 6,
+          "rawEntityCount": 4,
           "droppedForContainment": 0,
           "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution).",
           "missedSpans": [],
@@ -968,9 +961,7 @@
             "Tata Motors",
             "TMLCV",
             "Tata Motors Passenger Vehicles Limited",
-            "TMPV",
-            "Tata Motors",
-            "TML"
+            "Tata Motors"
           ]
         },
         {
@@ -1166,8 +1157,6 @@
           ],
           "extraUnresolvedSpans": [
             "Highway Engineering Consultancy",
-            "HEC",
-            "KNR Constructions",
             "Highway Engineering Consultancy"
           ],
           "note": "Tests that a non-NHAI counterparty (the consultancy HEC) is extracted as a counterparty span without resolving to any holding or to NHAI."
@@ -1179,7 +1168,6 @@
           ],
           "extraUnresolvedSpans": [
             "NHAI",
-            "M/s KNR Constructions Ltd",
             "M/s KNR Constructions Ltd"
           ],
           "note": null
@@ -1212,11 +1200,9 @@
         },
         {
           "id": "article-06",
-          "missedSpans": [
-            "National Highways Authority of India (NHAI)"
-          ],
+          "missedSpans": [],
           "extraUnresolvedSpans": [
-            "National Highways Authority of India"
+            "National Highways Authority of India (NHAI)"
           ],
           "note": null
         },
@@ -1237,8 +1223,7 @@
           "missedSpans": [],
           "extraUnresolvedSpans": [
             "Adani Road Transport",
-            "Adani Group",
-            "IRB Infrastructure Developers"
+            "Adani Group"
           ],
           "note": "Multi-entity case: tests that the extractor correctly resolves IRB Infrastructure Developers (our holding, mentioned as the losing bidder) while correctly NOT resolving the winning bidder Adani Road Transport, which is out of universe."
         },
@@ -1282,7 +1267,6 @@
           ],
           "extraUnresolvedSpans": [
             "InterGlobe Aviation",
-            "IndiGo",
             "Max Healthcare",
             "IndusInd Bank",
             "Hero MotoCorp"
@@ -1304,9 +1288,7 @@
             "Tata Motors",
             "TMLCV",
             "Tata Motors Passenger Vehicles Limited",
-            "TMPV",
-            "Tata Motors",
-            "TML"
+            "Tata Motors"
           ],
           "note": "Full negative: Tata Motors is a large Indian company unrelated to our six holdings and to NHAI -- tests baseline precision (no false positive resolution)."
         },

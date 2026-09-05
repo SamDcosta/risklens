@@ -14,7 +14,13 @@ interface AnalyzeResponse {
   abstainReason?: string;
   fallbackNote?: string;
   eventTitle?: string;
-  entities: { name: string; type: string; span: string; resolvedPositionSymbol: string | null }[];
+  entities: {
+    name: string;
+    type: string;
+    span: string;
+    resolvedPositionSymbol: string | null;
+    resolvedCounterpartyName: string | null;
+  }[];
   counterparties: { name: string; span: string; resolvedCounterpartyName: string | null }[];
 }
 
@@ -33,10 +39,13 @@ function ExtractorBadge({ extractor }: { extractor: "GEMINI" | "BASELINE" }) {
   );
 }
 
+// Names a holding directly, so the sample demonstrates resolution working.
+// The indirect-reference cases ("the concessionaire", "the infrastructure
+// major") live in eval/dataset.json, where a miss is measured rather than
+// mistaken for the feature being broken.
 const SAMPLE_TEXT =
-  "NHAI has issued a show-cause notice to the concessionaire operating a stretch of the Mumbai-Pune " +
-  "Expressway, citing repeated maintenance lapses, and has flagged the possibility of penal action if the " +
-  "issues are not resolved within 30 days.";
+  "KNR Constructions has received a Letter of Award from the National Highways Authority of India " +
+  "for a highway expansion project in Telangana worth Rs 1,734 crore.";
 
 export function EventAnalysisSection({
   allDependentHoldings,
@@ -161,8 +170,10 @@ export function EventAnalysisSection({
                             <span className="text-text">{e.name}</span> ({e.type.toLowerCase()})
                             {e.resolvedPositionSymbol ? (
                               <span className="ml-1 text-ok">→ {e.resolvedPositionSymbol}</span>
+                            ) : e.resolvedCounterpartyName ? (
+                              <span className="ml-1 text-ok">→ {e.resolvedCounterpartyName} (counterparty)</span>
                             ) : (
-                              <span className="ml-1 text-text-faint">→ unresolved</span>
+                              <span className="ml-1 text-text-faint">→ not in portfolio</span>
                             )}
                           </li>
                         ))}

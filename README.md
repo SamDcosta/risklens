@@ -210,14 +210,14 @@ Model: `gemini-3.5-flash-lite`. Full output in [`eval/results.json`](eval/result
 |---|---:|---:|
 | Coverage (items scored) | 100.0% | 100.0% |
 | Error rate (no response obtained) | 0.0% | 0.0% |
-| Entity precision | 57.1% | 62.0% |
-| **Entity recall** | **33.3%** | **91.7%** |
-| Counterparty linking accuracy | 84.0% | 80.0% |
+| Entity precision | 57.1% | 69.2% |
+| **Entity recall** | **33.3%** | **93.8%** |
+| Counterparty linking accuracy | 84.0% | 84.0% |
 | **Hallucination rate** | **0.0%** | **0.0%** |
 | Abstention rate | 24.0% | 0.0% |
-| Unresolved-entity rate | 21.4% | 78.9% |
+| Unresolved-entity rate | 21.4% | 75.4% |
 
-**Recall is the number that matters**: the LLM finds 91.7% of labeled entities against the baseline's 33.3%,
+**Recall is the number that matters**: the LLM finds 93.8% of labeled entities against the baseline's 33.3%,
 which is the measured case for using a model here rather than an assumed one.
 
 **Hallucination rate is 0.0% for both** — no returned entity failed the span-containment check. That is the
@@ -226,9 +226,12 @@ to reach the UI.
 
 Three results worth reading honestly rather than as wins:
 
-- **The baseline beats Gemini on counterparty linking (84.0% vs 80.0%).** Within our tiny counterparty
-  universe of one, exact string matching is simply hard to beat, and the model occasionally over-attributes.
-- **Gemini's unresolved-entity rate is much higher (78.9% vs 21.4%) and this is correct behaviour.** The
+- **Counterparty linking is a tie (84.0% each), and it used to be a loss.** An earlier run had the baseline
+  ahead at 84.0% vs 80.0% — not because the model was worse at reading, but because entity resolution only
+  ever checked the *holdings* table, so a counterparty the alias table already knew could never resolve when
+  it arrived as an entity. Fixing the lookup closed the gap. The lesson is that a metric gap is as likely to
+  be a bug in your own plumbing as a fact about the model.
+- **Gemini's unresolved-entity rate is much higher (75.4% vs 21.4%) and this is correct behaviour.** The
   dataset deliberately includes out-of-universe companies (Tata Motors, Adani Road Transport, L&T, SEBI).
   Extracting them *and* correctly declining to resolve them to one of our six holdings is what should happen.
   The baseline scores "better" here only because it cannot see them at all.
